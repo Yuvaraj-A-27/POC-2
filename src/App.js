@@ -1,14 +1,22 @@
 import React from 'react'
-import Dummy from './component/dummy'
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import Home from './component/Home/Home'
+import { Persistor, Store } from './Store/Store';
 
-function App() {
+function App(props) {
+
   return (
-    <div style = {{textAlign:'center'}}>
-      {/* <Dummy/> */}
-      <Home/>
-    </div>
+    <Provider store = {Store}>
+      <PersistGate loading={null} persistor={Persistor}>
+        <div style = {{textAlign:'center'}}>
+          <Home/>
+        </div>
+      </PersistGate>
+    </Provider>
   );
 }
+
+
 
 export default App;

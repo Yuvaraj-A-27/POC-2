@@ -1,6 +1,6 @@
 import { makeStyles, Paper, Typography } from '@material-ui/core'
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles((theme)=>({
     heading:{
@@ -9,19 +9,20 @@ const useStyles = makeStyles((theme)=>({
         marginLeft : '3%',
         marginRight : '3%',
         fontWeight:'800',
-        background: 'linear-gradient(10deg, #9269fa 40%, #d9d9d9 100%)',
+        background: 'linear-gradient(45deg, #2c0ccc 10%, #7665c9 50%)',
         border: 0,
         fontSize: 20,
         borderRadius: 3,
         color: 'white',
         height: 25,
         padding: '10px 30px',
-
-
     },
     hr:{
         marginTop:'1%',
-        margin: theme.spacing(5)
+        marginLeft: theme.spacing(5),
+        marginRight: theme.spacing(5),
+        marginBottom: theme.spacing(4),
+
     },
     paperDiv:{
         display : 'flex',
@@ -29,9 +30,10 @@ const useStyles = makeStyles((theme)=>({
         '& > *': {
             marginLeft: theme.spacing(10),
             marginTop: theme.spacing(1),
-            width: theme.spacing(25),
-            height: theme.spacing(7),
-        }
+            marginBottom: theme.spacing(3),
+            width: theme.spacing(25), 
+        },
+        padding: '0px 0px 30px',
     },
     paper:{
         background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -45,17 +47,13 @@ const useStyles = makeStyles((theme)=>({
 function Category(){
     const classes = useStyles()
 
-    const [category, setCategory] = useState()
-
-    useEffect(()=>{
-        axios.get("https://fakestoreapi.com/products/categories")
-        .then(res => setCategory(res.data))
-        .catch(err =>console.log(err))
-    },[])
-
-    const categories = category.map((e,index)=>(
-        <Paper className={classes.paper} elevation={3} key={index}>{e}</Paper>
-    ))
+    let category = useSelector(state => state.category)
+    let categories = null
+    if(category){
+        categories = category.map((e,index)=>(
+            <Paper className={classes.paper} elevation={3} key={index}>{e}</Paper>
+        ))
+    }
     return(
         <div>
             <Typography className={classes.heading} variant ='h5'>Category</Typography>
