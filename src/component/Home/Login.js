@@ -2,7 +2,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, makeStyles, TextFiel
 import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
-import { loginActive } from '../../Store/Action';
+import { activeUser, loginActive } from '../../Store/Action';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 
@@ -49,8 +49,10 @@ function Login(props){
         })
         .then((res)=>{
             localStorage.setItem('token',res.data.token)
+            let activeUser = props.userDetail.filter(e => e.username===userName)
+            props.activeUser(activeUser)
+            props.loginActiveAction()
             history.push('/dashboard')
-            console.log('running');
         })
         .catch((err)=>console.log(err))
     }
@@ -93,13 +95,15 @@ function Login(props){
 
 const mapStateToProps = state =>{
     return{
-        loginActive : state.loginActive
+        loginActive : state.loginActive,
+        userDetail : state.userDetail
     }
 }
 
 const mapDispatchToProps = dispatch =>{
     return{
-        loginActiveAction : ()=>dispatch(loginActive())
+        loginActiveAction : ()=>dispatch(loginActive()),
+        activeUser : (value)=> dispatch(activeUser(value))
     }
 }
 
