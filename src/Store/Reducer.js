@@ -1,10 +1,11 @@
-import { ACTIVE_USER, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LOGIN_ACTIVE } from "./ActionType";
+import { ACTIVE_USER, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LOGIN_ACTIVE, PRODUCT_POP_ACTIVE } from "./ActionType";
 
 const initialState ={
     category : [],
     product : [],
     userDetail : [],
     loginActive : false,
+    productPopUpActive : false,
     activeUserDetail : ''
 }
 
@@ -29,6 +30,12 @@ const Reducer = (state = initialState, action)=>{
             ...state,
             loginActive : !state.loginActive
         }
+
+        case PRODUCT_POP_ACTIVE: return{
+            ...state,
+            productPopUpActive : !state.productPopUpActive
+        }
+
         case ACTIVE_USER: return{
             ...state,
             activeUserDetail : action.payload
