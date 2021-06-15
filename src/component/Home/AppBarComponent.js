@@ -1,6 +1,9 @@
 import { AppBar, Button, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import React from 'react';
 import  MenuIcon from '@material-ui/icons/Menu'
+import { loginActive } from '../../Store/Action';
+import { connect } from 'react-redux';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,16 +22,20 @@ const useStyles = makeStyles((theme) => ({
         '&:hover' :{
             backgroundColor:'red',
         }
+    },
+    loginAnchor:{
+        textDecoration: 'none',
+        color : 'white',
     }
   }));
 
-function AppBarComponent({id}){
+function AppBarComponent(props){
     const classes = useStyles()
 
 
     return(
         <div>
-            <AppBar id={id} position="sticky" className={classes.root}>
+            <AppBar id={props.id} position="sticky" className={classes.root}>
                 <Toolbar>
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                     <MenuIcon />
@@ -37,11 +44,19 @@ function AppBarComponent({id}){
                     MyStore
                 </Typography>
                 <Button className = {classes.btn} color="inherit">Register</Button>
-                <Button className = {classes.btn} color="inherit">Login</Button>
+                <Button className = {classes.btn} color="inherit" onClick={props.loginActive}>
+                    Login
+                </Button>
                 </Toolbar>
             </AppBar>
         </div>
     )
 }
 
-export default AppBarComponent;
+const mapDispatchToProps = dispatch =>{
+    return{
+        loginActive : () => dispatch(loginActive())
+    }
+}
+
+export default connect(null,mapDispatchToProps)(AppBarComponent);

@@ -1,4 +1,4 @@
-import { INITIAL_CATEGORY, INITIAL_PRODUCT } from "./ActionType"
+import { INITIAL_CATEGORY, INITIAL_PRODUCT, LOGIN_ACTIVE } from "./ActionType"
 
 export const initialCategory = (value) =>{
     return{
@@ -11,5 +11,11 @@ export const initialProduct = (value) =>{
     return{
         type: INITIAL_PRODUCT,
         payload : value
+    }
+}
+
+export const loginActive = ()=>{
+    return{
+        type: LOGIN_ACTIVE,
     }
 }
