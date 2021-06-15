@@ -46,19 +46,19 @@ function Product(){
 
     const product = useSelector(state=>state.product)
     
-    const allProduct = product.map((e)=>(<ProductCard key={e.id} image= {e.image} title={e.title} />))
+    const allProduct = product.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title} />))
 
     const electronics = product.filter((e)=> e.category==='electronics')
-    const electronicsProduct = electronics.map((e)=>(<ProductCard key={e.id} image= {e.image} title={e.title}/>))
+    const electronicsProduct = electronics.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title}/>))
 
     const jewelerys = product.filter((e)=> e.category==='jewelery')
-    const jeweleryProduct = jewelerys.map((e)=>(<ProductCard key={e.id} image= {e.image} title={e.title}/>))
+    const jeweleryProduct = jewelerys.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title}/>))
 
     const menClothings = product.filter((e)=> e.category==="men's clothing")
-    const menClothingProduct = menClothings.map((e)=>(<ProductCard key={e.id} image= {e.image} title={e.title}/>))
+    const menClothingProduct = menClothings.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title}/>))
 
     const womenClothings = product.filter((e)=> e.category==="women's clothing")
-    const womenClothingProduct = womenClothings.map((e)=>(<ProductCard key={e.id} image= {e.image} title={e.title}/>))
+    const womenClothingProduct = womenClothings.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title}/>))
     return(
         <div>
             <Typography className={classes.heading} variant ='h5'>All Products</Typography>

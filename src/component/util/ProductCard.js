@@ -1,7 +1,7 @@
 import { Card, CardActionArea, CardContent, CardMedia, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { connect } from 'react-redux';
-import {loginActive, productPopUpActive} from '../../Store/Action'
+import {currentProduct, loginActive, productPopUpActive} from '../../Store/Action'
 
 const useStyles = makeStyles(()=>({
     card:{
@@ -20,11 +20,16 @@ const useStyles = makeStyles(()=>({
     },
 }))
 
-function ProductCard({image, title, loginActive, activeUser,productPopUpActiveHandler}){
+function ProductCard({product_id,image, title, loginActive, activeUser,productPopUpActiveHandler,currentProductHandler}){
     const classes = useStyles()
 
+    const productPopUpHandler = ()=>{
+        productPopUpActiveHandler()
+        currentProductHandler(product_id)
+    }
+
     return(
-            <Card className ={classes.card} onClick={activeUser.length!==0?productPopUpActiveHandler:loginActive}>
+            <Card className ={classes.card} onClick={activeUser.length!==0?productPopUpHandler:loginActive}>
                  <CardActionArea>
                      <CardMedia 
                          className={classes.cardMedia}
@@ -50,7 +55,8 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = dispatch =>{
     return{
         loginActive : ()=>dispatch(loginActive()),
-        productPopUpActiveHandler : ()=> dispatch(productPopUpActive())
+        productPopUpActiveHandler : ()=> dispatch(productPopUpActive()),
+        currentProductHandler : (value)=> dispatch(currentProduct(value))
     }
 }
 
