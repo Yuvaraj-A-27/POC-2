@@ -22,13 +22,13 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function AppBarComponent(){
+function AppBarComponent({id}){
     const classes = useStyles()
 
 
     return(
         <div>
-            <AppBar position="sticky" className={classes.root}>
+            <AppBar id={id} position="sticky" className={classes.root}>
                 <Toolbar>
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                     <MenuIcon />

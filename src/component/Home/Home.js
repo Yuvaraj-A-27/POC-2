@@ -5,9 +5,31 @@ import { initialCategory, initialProduct } from "../../Store/Action";
 import AppBarComponent from "./AppBarComponent";
 import Category from "./Category";
 import Product from "./Product";
+import NavigationIcon from '@material-ui/icons/Navigation';
+import { makeStyles } from "@material-ui/core";
 
+
+const useStyles = makeStyles((theme)=>({
+    upArrow:{
+        position: 'sticky',
+        background:'#6b56e3' ,
+        bottom: '7%',
+        width: '80px',
+        height: '60px',
+        borderRadius:20,
+        color:'white',
+        marginLeft:'88%',
+        transition : 'transform 0.2s',
+        '&:hover':{
+            transform: 'translateY(-10px)'
+        }
+    }
+}))
 
 function Home(props){
+
+    const classes = useStyles()
+
     useEffect(()=>{
         async function datafetch(){
             try{
@@ -35,9 +57,10 @@ function Home(props){
 
     return(
         <div>
-            <AppBarComponent />
+            <AppBarComponent id='Appbar' />
             <Category />
             <Product />
+            <a href='#Appbar'><NavigationIcon className={classes.upArrow} /></a>
         </div>
     )
 }
