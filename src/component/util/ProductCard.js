@@ -1,5 +1,7 @@
 import { Card, CardActionArea, CardContent, CardMedia, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
+import { connect } from 'react-redux';
+import {loginActive} from '../../Store/Action'
 
 const useStyles = makeStyles(()=>({
     card:{
@@ -18,11 +20,11 @@ const useStyles = makeStyles(()=>({
     },
 }))
 
-function ProductCard({image, title, description}){
+function ProductCard({image, title, loginActive}){
     const classes = useStyles()
 
     return(
-            <Card className ={classes.card}>
+            <Card className ={classes.card} onClick={loginActive}>
                  <CardActionArea>
                      <CardMedia 
                          className={classes.cardMedia}
@@ -39,4 +41,10 @@ function ProductCard({image, title, description}){
     )
 }
 
-export default ProductCard;
+const mapDispatchToProps = dispatch =>{
+    return{
+        loginActive : ()=>dispatch(loginActive())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ProductCard);

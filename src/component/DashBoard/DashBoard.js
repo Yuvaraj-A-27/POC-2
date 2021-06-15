@@ -1,9 +1,39 @@
+import { makeStyles } from '@material-ui/core'
 import React from 'react'
+import Category from '../util/Category'
+import Product from '../util/Product'
+import AppBarComponentDB from './AppBarComponentDB'
+import NavigationIcon from '@material-ui/icons/Navigation';
+
+
+const useStyles = makeStyles(()=>({
+    upArrow:{
+        position: 'sticky',
+        background:'#6b56e3' ,
+        bottom: '7%',
+        width: '80px',
+        height: '60px',
+        borderRadius:20,
+        color:'white',
+        marginLeft:'88%',
+        transition : 'transform 0.2s',
+        '&:hover':{
+            transform: 'translateY(-10px)'
+        }
+    }
+}))
 
 function DashBoard(){
+    const classes = useStyles()
     return(
-        <p>checking</p>
+        <div>
+            <AppBarComponentDB id='Appbar'/>
+            <Category />
+            <Product />
+            <a href='#Appbar'><NavigationIcon className={classes.upArrow} /></a>    
+        </div>
     )
 }
 
 export default DashBoard
+

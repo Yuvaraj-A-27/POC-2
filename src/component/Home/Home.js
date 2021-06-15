@@ -1,16 +1,16 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { initialCategory, initialProduct} from "../../Store/Action";
+import { initialCategory, initialProduct, initialUserDetail} from "../../Store/Action";
 import AppBarComponent from "./AppBarComponent";
-import Category from "./Category";
-import Product from "./Product";
+import Category from "../util/Category";
+import Product from "../util/Product";
 import NavigationIcon from '@material-ui/icons/Navigation';
 import { makeStyles } from "@material-ui/core";
 import Login from "./Login";
 
 
-const useStyles = makeStyles((theme)=>({
+const useStyles = makeStyles(()=>({
     upArrow:{
         position: 'sticky',
         background:'#6b56e3' ,
@@ -52,6 +52,15 @@ function Home(props){
             catch(err){
                 console.log(err);
             }
+            try{
+                let res = await axios.get("https://fakestoreapi.com/users")
+                if(res){
+                    props.initialUserDetail(res.data)
+                }
+            }
+            catch(err){
+                console.log(err);
+            }
         }
         datafetch()
       },[props])
@@ -77,6 +86,7 @@ const mapDispatchToProps = dispatch =>{
     return{
       initialCategory : (value) => dispatch(initialCategory(value)),
       initialProduct : (value) => dispatch(initialProduct(value)),
+      initialUserDetail : (value) => dispatch(initialUserDetail(value))
     }
   }
 
