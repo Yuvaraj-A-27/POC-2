@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { initialCategory, initialProduct } from "../../Store/Action";
+import { initialCategory, initialProduct} from "../../Store/Action";
 import AppBarComponent from "./AppBarComponent";
 import Category from "./Category";
 import Product from "./Product";
 import NavigationIcon from '@material-ui/icons/Navigation';
 import { makeStyles } from "@material-ui/core";
+import Login from "./Login";
 
 
 const useStyles = makeStyles((theme)=>({
@@ -60,9 +61,16 @@ function Home(props){
             <AppBarComponent id='Appbar' />
             <Category />
             <Product />
-            <a href='#Appbar'><NavigationIcon className={classes.upArrow} /></a>
+            <a href='#Appbar'><NavigationIcon className={classes.upArrow} /></a>    
+            <Login />
         </div>
     )
+}
+
+const mapStateToProps = state =>{
+    return{
+        loginActive : state.loginActive
+    }
 }
 
 const mapDispatchToProps = dispatch =>{
@@ -72,4 +80,4 @@ const mapDispatchToProps = dispatch =>{
     }
   }
 
-export default connect(null,mapDispatchToProps)(Home)
+export default connect(mapStateToProps,mapDispatchToProps)(Home)

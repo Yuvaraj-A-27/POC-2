@@ -1,8 +1,10 @@
-import { INITIAL_CATEGORY, INITIAL_PRODUCT } from "./ActionType";
+import { INITIAL_CATEGORY, INITIAL_PRODUCT, LOGIN_ACTIVE } from "./ActionType";
 
 const initialState ={
     category : [],
     product : [],
+    loginActive : false,
+    activeUserDetail : ''
 }
 console.log(initialState);
 
@@ -15,6 +17,10 @@ const Reducer = (state = initialState, action)=>{
         case INITIAL_PRODUCT:return{
             ...state,
             product : [...action.payload]
+        }
+        case LOGIN_ACTIVE: return{
+            ...state,
+            loginActive : !state.loginActive
         }
         default : return state
     }
