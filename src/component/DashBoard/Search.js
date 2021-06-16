@@ -45,7 +45,6 @@ function Search(props){
                     <TextField
                         label="Search for Product"
                         style={{ margin: 8 }}
-                        placeholder=""
                         fullWidth
                         size = 'medium'
                         margin="dense"
