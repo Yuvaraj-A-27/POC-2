@@ -10,7 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
-import { activeUser } from '../../Store/Action';
+import { activeUser, cartActive, profileActive } from '../../Store/Action';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -60,8 +60,8 @@ function AppBarComponentDB(props) {
       onClose={()=>setAnchorEl(!anchorEl)}
       className={classes.menu}
     >
-      <MenuItem onClick=''>Profile</MenuItem>
-      <MenuItem onClick=''>Cart</MenuItem>
+      <MenuItem onClick={props.profileActiveHandler}>Profile</MenuItem>
+      <MenuItem onClick={props.cartActiveHandler}>Cart</MenuItem>
       <MenuItem onClick = {logoutHandler}>Logout</MenuItem>
     </Menu>
   );
@@ -111,7 +111,9 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
   return{
-    activeUserHandler : (value)=>dispatch(activeUser(value))
+    activeUserHandler : (value)=>dispatch(activeUser(value)),
+    profileActiveHandler : ()=> dispatch(profileActive()),
+    cartActiveHandler : () => dispatch(cartActive())
   }
 }
 

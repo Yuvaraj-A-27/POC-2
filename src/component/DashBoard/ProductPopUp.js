@@ -1,13 +1,12 @@
-import {  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, makeStyles, Paper} from '@material-ui/core';
+import {  Dialog, DialogContent, DialogContentText, DialogTitle, makeStyles, Paper} from '@material-ui/core';
 import React from 'react'
 import { connect } from 'react-redux';
-import { productPopUpActive } from '../../Store/Action';
+import { addToCart, productPopUpActive } from '../../Store/Action';
 import AppleIcon from '@material-ui/icons/Apple';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const useStyles = makeStyles(()=>({
     title:{
-        // fontSize:"10px",
         marginTop:'-20px',
         height: '30px',
     },
@@ -52,7 +51,7 @@ const useStyles = makeStyles(()=>({
     },
     addcartIcon:{
         color: 'white',
-        marginTop:'200px',
+        marginTop:'207px',
         marginLeft:'350px',
         transition : 'transform 0.3s',
         '&:hover':{
@@ -75,6 +74,11 @@ function ProductPopUp(props){
     if(props.currentProduct!==0){
     const product = props.productList.filter((e) => e.id===props.currentProduct)
     const productRender = product[0]
+
+    const addToCartHandler =()=>{
+        props.addToCart(props.currentProduct)
+    }
+
     return (
         <Dialog
             open={props.productPopUpActive}
@@ -83,12 +87,19 @@ function ProductPopUp(props){
             maxWidth ='lg'
             classes={{ paperWidthLg: classes.dialogPaper }}
         >
-            <DialogTitle  className={classes.title}><h1 ><AppleIcon className={classes.icon} fontSize='large' />MyStore</h1></DialogTitle>
+            <DialogTitle  className={classes.title}>
+                <h1 >
+                    <AppleIcon className={classes.icon} fontSize='large' />
+                    MyStore
+                </h1>
+            </DialogTitle>
+
             <DialogContent>
                 <Paper elevation={3} className={classes.emptyDiv}>&ensp;
-                <AddCircleOutlineIcon fontSize='2rem' className={classes.addcartIcon} />
-                <h4 className={classes.addCartText} >Add to Cart</h4>
+                    <AddCircleOutlineIcon onClick={addToCartHandler} className={classes.addcartIcon} />
+                    <h4 className={classes.addCartText} >Add to Cart</h4>
                  </Paper>
+
                 <img className={classes.image} src={productRender.image} alt={productRender.id} />
                 <h4 className={classes.productTitle}>{productRender.title}</h4>
             
@@ -96,7 +107,9 @@ function ProductPopUp(props){
                 <p className={classes.detailDiv}>{productRender.description}</p>
                 <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper>
             </DialogContentText>
-            <h2 className={classes.price}>Price - ${productRender.price}</h2>
+
+                <h2 className={classes.price}>Price - ${productRender.price}</h2>
+                
             </DialogContent>
         </Dialog>
     );
@@ -116,7 +129,8 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
     return{
-        productPopUpActiveHandler : ()=> dispatch(productPopUpActive())
+        productPopUpActiveHandler : ()=> dispatch(productPopUpActive()),
+        addToCart : (id) => dispatch(addToCart(id))
     }
 }
 

@@ -1,4 +1,4 @@
-import { ACTIVE_USER, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LOGIN_ACTIVE, PRODUCT_POP_ACTIVE } from "./ActionType"
+import { ACTIVE_USER, ADD_TO_CART, CART_ACTIVE, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LOGIN_ACTIVE, PRODUCT_POP_ACTIVE, PROFILE_ACTIVE } from "./ActionType"
 
 export const initialCategory = (value) =>{
     return{
@@ -45,5 +45,24 @@ export const currentProduct = (id) =>{
     return{
         type: CURRENT_PRODUCT,
         payload : id
+    }
+}
+
+export const addToCart = (id) =>{
+    return{
+        type:ADD_TO_CART,
+        payload: id
+    }
+}
+
+export const profileActive = ()=>{
+    return{
+        type:PROFILE_ACTIVE,
+    }
+}
+
+export const cartActive = () =>{
+    return{
+        type: CART_ACTIVE,
     }
 }
