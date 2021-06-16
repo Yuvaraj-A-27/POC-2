@@ -56,6 +56,7 @@ function ProductPopUp(props){
     const classes = useStyles()
 
     //state value 
+    if(props.currentProduct!==0){
     const product = props.productList.filter((e) => e.id===props.currentProduct)
     const productRender = product[0]
     return (
@@ -76,7 +77,7 @@ function ProductPopUp(props){
                 <p className={classes.detailDiv}>{productRender.description}</p>
                 <Paper elevation={3} className={classes.emptyDiv2}>&ensp; </Paper>
             </DialogContentText>
-            <h2>Price - ${productRender.price}</h2>
+            <h2 className={classes.price}>Price - ${productRender.price}</h2>
             </DialogContent>
             
                        
@@ -85,6 +86,10 @@ function ProductPopUp(props){
             </DialogActions>
         </Dialog>
     );
+    }
+    return(
+        <p>checking</p>
+    )
 }
 
 const mapStateToProps = state =>{

@@ -7,7 +7,7 @@ const initialState ={
     loginActive : false,
     productPopUpActive : false,
     activeUserDetail : '',
-    currentProduct : 0,
+    currentProduct : 1,
 }
 
 const Reducer = (state = initialState, action)=>{

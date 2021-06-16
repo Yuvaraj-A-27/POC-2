@@ -5,6 +5,7 @@ import Product from '../util/Product'
 import AppBarComponentDB from './AppBarComponentDB'
 import NavigationIcon from '@material-ui/icons/Navigation';
 import ProductPopUp from './ProductPopUp'
+import Search from './Search'
 
 
 const useStyles = makeStyles(()=>({
@@ -29,6 +30,7 @@ function DashBoard(){
     return(
         <div>
             <AppBarComponentDB id='Appbar'/>
+            <Search />
             <ProductPopUp />
             <Category />
             <Product />
