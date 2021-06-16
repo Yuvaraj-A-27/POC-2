@@ -1,7 +1,7 @@
 import { AppBar, Button, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import React from 'react';
 import  MenuIcon from '@material-ui/icons/Menu'
-import { loginActive } from '../../Store/Action';
+import { loginActive, registerActive } from '../../Store/Action';
 import { connect } from 'react-redux';
 
 
@@ -34,7 +34,7 @@ function AppBarComponent(props){
 
 
     return(
-        <div>
+        <div data-testid = {props.dataTestid}>
             <AppBar id={props.id} position="sticky" className={classes.root}>
                 <Toolbar>
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -43,8 +43,10 @@ function AppBarComponent(props){
                 <Typography variant="h5" className={classes.title}>
                     MyStore
                 </Typography>
-                <Button className = {classes.btn} color="inherit">Register</Button>
-                <Button className = {classes.btn} color="inherit" onClick={props.loginActive}>
+                <Button className = {classes.btn} data-testid='register-btn' color="inherit" onClick= {props.registerActiveHandler}>
+                    Register
+                </Button>
+                <Button className = {classes.btn} data-testid='login-btn' color="inherit" onClick={props.loginActiveHandler}>
                     Login
                 </Button>
                 </Toolbar>
@@ -55,7 +57,8 @@ function AppBarComponent(props){
 
 const mapDispatchToProps = dispatch =>{
     return{
-        loginActive : () => dispatch(loginActive())
+        loginActiveHandler : () => dispatch(loginActive()),
+        registerActiveHandler : ()=>dispatch(registerActive())
     }
 }
 

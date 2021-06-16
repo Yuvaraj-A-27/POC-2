@@ -8,6 +8,7 @@ import Product from "../util/Product";
 import NavigationIcon from '@material-ui/icons/Navigation';
 import { makeStyles } from "@material-ui/core";
 import Login from "./Login";
+import Register from "./Register";
 
 
 const useStyles = makeStyles(()=>({
@@ -67,11 +68,12 @@ function Home(props){
 
     return(
         <div>
-            <AppBarComponent id='Appbar' />
-            <Category />
-            <Product />
-            <a href='#Appbar'><NavigationIcon className={classes.upArrow} /></a>    
-            <Login />
+            <AppBarComponent dataTestid='AppBar' id='Appbar' />
+            <Category dataTestid = 'Category' />
+            <Product dataTestid = 'Product' />
+            <a href='#Appbar'><NavigationIcon data-testid='navIcon' className={classes.upArrow} /></a>    
+            <Login dataTestid='Login' />
+            <Register dataTestid = 'Register' />
         </div>
     )
 }

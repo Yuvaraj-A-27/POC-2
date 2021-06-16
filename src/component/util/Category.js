@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme)=>({
     }
 }))
 
-function Category(){
+function Category(props){
     const classes = useStyles()
 
     let category = useSelector(state => state.category)
@@ -69,7 +69,7 @@ function Category(){
         ))
     }
     return(
-        <div>
+        <div data-testid={props.dataTestid}>
             <Typography className={classes.heading} variant ='h5'>Category</Typography>
             <div className={classes.paperDiv}>
                 {categories}

@@ -1,4 +1,4 @@
-import { ACTIVE_USER, ADD_TO_CART, CART_ACTIVE, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LOGIN_ACTIVE, PRODUCT_POP_ACTIVE, PROFILE_ACTIVE } from "./ActionType";
+import { ACTIVE_USER, ADD_TO_CART, CART_ACTIVE, CREATE_USER, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LOGIN_ACTIVE, PRODUCT_POP_ACTIVE, PROFILE_ACTIVE, REGISTER_ACTIVE } from "./ActionType";
 
 const initialState ={
     category : [],
@@ -8,6 +8,7 @@ const initialState ={
     productPopUpActive : false,
     profileActive : false,
     cartActive : false,
+    registerActive : false,
     activeUserDetail : '',
     currentProduct : 1,
     cart:[],
@@ -35,7 +36,8 @@ const Reducer = (state = initialState, action)=>{
             loginActive : !state.loginActive,
             productPopUpActive : false,
             profileActive:false,
-            cartActive : false
+            cartActive : false,
+            registerActive : false,
         }
 
         case PRODUCT_POP_ACTIVE: return{
@@ -43,7 +45,8 @@ const Reducer = (state = initialState, action)=>{
             productPopUpActive : !state.productPopUpActive,
             loginActive : false,
             profileActive:false,
-            cartActive : false
+            cartActive : false,
+            registerActive : false,
         }
 
         case ACTIVE_USER: return{
@@ -66,7 +69,8 @@ const Reducer = (state = initialState, action)=>{
             profileActive : !state.profileActive,
             loginActive : false,
             productPopUpActive:false,
-            cartActive : false
+            cartActive : false,
+            registerActive : false,
         }
 
         case CART_ACTIVE: return{
@@ -74,7 +78,22 @@ const Reducer = (state = initialState, action)=>{
             cartActive : !state.cartActive,
             loginActive : false,
             productPopUpActive:false,
+            profileActive : false,
+            registerActive : false,
+        }
+
+        case REGISTER_ACTIVE : return{
+            ...state,
+            registerActive : !state.registerActive,
+            cartActive : false,
+            loginActive : false,
+            productPopUpActive:false,
             profileActive : false
+        }
+
+        case CREATE_USER : return{
+            ...state,
+            userDetail : [...state.userDetail, action.payload]
         }
 
         default : return state

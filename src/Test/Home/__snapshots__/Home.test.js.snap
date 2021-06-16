@@ -1,0 +1,575 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Component Testing 1`] = `
+<div>
+  <div
+    data-testid="AppBar"
+  >
+    <header
+      className="MuiPaper-root MuiAppBar-root MuiAppBar-positionSticky MuiAppBar-colorPrimary makeStyles-root-2 MuiPaper-elevation4"
+      id="Appbar"
+    >
+      <div
+        className="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
+      >
+        <button
+          aria-label="menu"
+          className="MuiButtonBase-root MuiIconButton-root makeStyles-menuButton-3 MuiIconButton-colorInherit MuiIconButton-edgeStart"
+          disabled={false}
+          onBlur={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+              />
+            </svg>
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <h5
+          className="MuiTypography-root makeStyles-title-4 MuiTypography-h5"
+        >
+          MyStore
+        </h5>
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-btn-5 MuiButton-colorInherit"
+          data-testid="register-btn"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            Register
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-btn-5 MuiButton-colorInherit"
+          data-testid="login-btn"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            Login
+          </span>
+          <span
+            className="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </header>
+  </div>
+  <div
+    data-testid="Category"
+  >
+    <h5
+      className="MuiTypography-root makeStyles-heading-7 MuiTypography-h5"
+    >
+      Category
+    </h5>
+    <div
+      className="makeStyles-paperDiv-9"
+    />
+    <hr
+      className="makeStyles-hr-8"
+    />
+  </div>
+  <div
+    data-testid="Product"
+  >
+    <h5
+      className="MuiTypography-root makeStyles-heading-12 MuiTypography-h5"
+    >
+      All Products
+    </h5>
+    <div
+      className="sc-jSFjdj jvXOvp rec rec-carousel-wrapper "
+      style={Object {}}
+    >
+      <div
+        className="sc-eCApnc jCKguF rec rec-carousel"
+        size={
+          Object {
+            "height": 0,
+          }
+        }
+        style={
+          Object {
+            "height": 0,
+          }
+        }
+      >
+        <button
+          className="sc-bdnxRM ehkxHv rec rec-arrow rec rec-arrow-left"
+          disabled={true}
+          onClick={[Function]}
+          style={Object {}}
+          tabIndex={0}
+          type="button"
+        >
+          ❮
+        </button>
+        <div
+          className="sc-dlnjwi dTGAUq rec rec-slider-container"
+        >
+          <div
+            className="sc-hKFxyN gXEQKd rec rec-slider"
+            style={
+              Object {
+                "left": "0px",
+                "right": "auto",
+                "top": "auto",
+                "transition": "all 500ms ease",
+              }
+            }
+          >
+            <div
+              className="rec rec-swipable"
+              onMouseDown={[Function]}
+              style={
+                Object {
+                  "display": "flex",
+                  "flexDirection": "row",
+                }
+              }
+            />
+          </div>
+        </div>
+        <button
+          className="sc-bdnxRM ehkxHv rec rec-arrow rec rec-arrow-right"
+          disabled={true}
+          onClick={[Function]}
+          style={Object {}}
+          tabIndex={0}
+          type="button"
+        >
+          ❯
+        </button>
+      </div>
+      <div
+        className="sc-iCoGMd xzcEF rec rec-pagination"
+      >
+        <button
+          className="sc-gKAaRy ejXxNI rec rec-dot rec rec-dot_active"
+          onClick={[Function]}
+          tabIndex={-1}
+          type="button"
+        />
+      </div>
+    </div>
+    <hr
+      className="makeStyles-hr-13"
+    />
+    <h5
+      className="MuiTypography-root makeStyles-heading-12 MuiTypography-h5"
+      id="electronics"
+    >
+      Electronics
+    </h5>
+    <div
+      className="sc-jSFjdj jvXOvp rec rec-carousel-wrapper "
+      style={Object {}}
+    >
+      <div
+        className="sc-eCApnc jCKguF rec rec-carousel"
+        size={
+          Object {
+            "height": 0,
+          }
+        }
+        style={
+          Object {
+            "height": 0,
+          }
+        }
+      >
+        <button
+          className="sc-bdnxRM ehkxHv rec rec-arrow rec rec-arrow-left"
+          disabled={true}
+          onClick={[Function]}
+          style={Object {}}
+          tabIndex={0}
+          type="button"
+        >
+          ❮
+        </button>
+        <div
+          className="sc-dlnjwi dTGAUq rec rec-slider-container"
+        >
+          <div
+            className="sc-hKFxyN gXEQKd rec rec-slider"
+            style={
+              Object {
+                "left": "0px",
+                "right": "auto",
+                "top": "auto",
+                "transition": "all 500ms ease",
+              }
+            }
+          >
+            <div
+              className="rec rec-swipable"
+              onMouseDown={[Function]}
+              style={
+                Object {
+                  "display": "flex",
+                  "flexDirection": "row",
+                }
+              }
+            />
+          </div>
+        </div>
+        <button
+          className="sc-bdnxRM ehkxHv rec rec-arrow rec rec-arrow-right"
+          disabled={true}
+          onClick={[Function]}
+          style={Object {}}
+          tabIndex={0}
+          type="button"
+        >
+          ❯
+        </button>
+      </div>
+      <div
+        className="sc-iCoGMd xzcEF rec rec-pagination"
+      >
+        <button
+          className="sc-gKAaRy ejXxNI rec rec-dot rec rec-dot_active"
+          onClick={[Function]}
+          tabIndex={-1}
+          type="button"
+        />
+      </div>
+    </div>
+    <hr
+      className="makeStyles-hr-13"
+    />
+    <h5
+      className="MuiTypography-root makeStyles-heading-12 MuiTypography-h5"
+      id="jewelery"
+    >
+      Jewelery
+    </h5>
+    <div
+      className="sc-jSFjdj jvXOvp rec rec-carousel-wrapper "
+      style={Object {}}
+    >
+      <div
+        className="sc-eCApnc jCKguF rec rec-carousel"
+        size={
+          Object {
+            "height": 0,
+          }
+        }
+        style={
+          Object {
+            "height": 0,
+          }
+        }
+      >
+        <button
+          className="sc-bdnxRM ehkxHv rec rec-arrow rec rec-arrow-left"
+          disabled={true}
+          onClick={[Function]}
+          style={Object {}}
+          tabIndex={0}
+          type="button"
+        >
+          ❮
+        </button>
+        <div
+          className="sc-dlnjwi dTGAUq rec rec-slider-container"
+        >
+          <div
+            className="sc-hKFxyN gXEQKd rec rec-slider"
+            style={
+              Object {
+                "left": "0px",
+                "right": "auto",
+                "top": "auto",
+                "transition": "all 500ms ease",
+              }
+            }
+          >
+            <div
+              className="rec rec-swipable"
+              onMouseDown={[Function]}
+              style={
+                Object {
+                  "display": "flex",
+                  "flexDirection": "row",
+                }
+              }
+            />
+          </div>
+        </div>
+        <button
+          className="sc-bdnxRM ehkxHv rec rec-arrow rec rec-arrow-right"
+          disabled={true}
+          onClick={[Function]}
+          style={Object {}}
+          tabIndex={0}
+          type="button"
+        >
+          ❯
+        </button>
+      </div>
+      <div
+        className="sc-iCoGMd xzcEF rec rec-pagination"
+      >
+        <button
+          className="sc-gKAaRy ejXxNI rec rec-dot rec rec-dot_active"
+          onClick={[Function]}
+          tabIndex={-1}
+          type="button"
+        />
+      </div>
+    </div>
+    <hr
+      className="makeStyles-hr-13"
+    />
+    <h5
+      className="MuiTypography-root makeStyles-heading-12 MuiTypography-h5"
+      id="men's clothing"
+    >
+      Men's Clothing
+    </h5>
+    <div
+      className="sc-jSFjdj jvXOvp rec rec-carousel-wrapper "
+      style={Object {}}
+    >
+      <div
+        className="sc-eCApnc jCKguF rec rec-carousel"
+        size={
+          Object {
+            "height": 0,
+          }
+        }
+        style={
+          Object {
+            "height": 0,
+          }
+        }
+      >
+        <button
+          className="sc-bdnxRM ehkxHv rec rec-arrow rec rec-arrow-left"
+          disabled={true}
+          onClick={[Function]}
+          style={Object {}}
+          tabIndex={0}
+          type="button"
+        >
+          ❮
+        </button>
+        <div
+          className="sc-dlnjwi dTGAUq rec rec-slider-container"
+        >
+          <div
+            className="sc-hKFxyN gXEQKd rec rec-slider"
+            style={
+              Object {
+                "left": "0px",
+                "right": "auto",
+                "top": "auto",
+                "transition": "all 500ms ease",
+              }
+            }
+          >
+            <div
+              className="rec rec-swipable"
+              onMouseDown={[Function]}
+              style={
+                Object {
+                  "display": "flex",
+                  "flexDirection": "row",
+                }
+              }
+            />
+          </div>
+        </div>
+        <button
+          className="sc-bdnxRM ehkxHv rec rec-arrow rec rec-arrow-right"
+          disabled={true}
+          onClick={[Function]}
+          style={Object {}}
+          tabIndex={0}
+          type="button"
+        >
+          ❯
+        </button>
+      </div>
+      <div
+        className="sc-iCoGMd xzcEF rec rec-pagination"
+      >
+        <button
+          className="sc-gKAaRy ejXxNI rec rec-dot rec rec-dot_active"
+          onClick={[Function]}
+          tabIndex={-1}
+          type="button"
+        />
+      </div>
+    </div>
+    <hr
+      className="makeStyles-hr-13"
+    />
+    <h5
+      className="MuiTypography-root makeStyles-heading-12 MuiTypography-h5"
+      id="women's clothing"
+    >
+      Women's Clothing
+    </h5>
+    <div
+      className="sc-jSFjdj jvXOvp rec rec-carousel-wrapper "
+      style={Object {}}
+    >
+      <div
+        className="sc-eCApnc jCKguF rec rec-carousel"
+        size={
+          Object {
+            "height": 0,
+          }
+        }
+        style={
+          Object {
+            "height": 0,
+          }
+        }
+      >
+        <button
+          className="sc-bdnxRM ehkxHv rec rec-arrow rec rec-arrow-left"
+          disabled={true}
+          onClick={[Function]}
+          style={Object {}}
+          tabIndex={0}
+          type="button"
+        >
+          ❮
+        </button>
+        <div
+          className="sc-dlnjwi dTGAUq rec rec-slider-container"
+        >
+          <div
+            className="sc-hKFxyN gXEQKd rec rec-slider"
+            style={
+              Object {
+                "left": "0px",
+                "right": "auto",
+                "top": "auto",
+                "transition": "all 500ms ease",
+              }
+            }
+          >
+            <div
+              className="rec rec-swipable"
+              onMouseDown={[Function]}
+              style={
+                Object {
+                  "display": "flex",
+                  "flexDirection": "row",
+                }
+              }
+            />
+          </div>
+        </div>
+        <button
+          className="sc-bdnxRM ehkxHv rec rec-arrow rec rec-arrow-right"
+          disabled={true}
+          onClick={[Function]}
+          style={Object {}}
+          tabIndex={0}
+          type="button"
+        >
+          ❯
+        </button>
+      </div>
+      <div
+        className="sc-iCoGMd xzcEF rec rec-pagination"
+      >
+        <button
+          className="sc-gKAaRy ejXxNI rec rec-dot rec rec-dot_active"
+          onClick={[Function]}
+          tabIndex={-1}
+          type="button"
+        />
+      </div>
+    </div>
+    <hr
+      className="makeStyles-hr-13"
+    />
+  </div>
+  <a
+    href="#Appbar"
+  >
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root makeStyles-upArrow-1"
+      data-testid="navIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"
+      />
+    </svg>
+  </a>
+  <div
+    data-testid="Login"
+  />
+  <div
+    data-tesid="Register"
+  />
+</div>
+`;

@@ -1,4 +1,4 @@
-import { Dialog, makeStyles } from '@material-ui/core';
+import { Dialog, DialogTitle, makeStyles } from '@material-ui/core';
 import React from 'react'
 import { connect } from 'react-redux';
 import { cartActive } from '../../Store/Action';
@@ -22,7 +22,11 @@ function Cart(props){
         maxWidth ='lg'
         classes={{ paperWidthLg: classes.dialogPaper }}
         >
-        checking
+            <DialogTitle>
+                <h2>
+                    Cart - {props.activeUserDetail[0].name.firstname} {props.activeUserDetail[0].name.lastname}
+                </h2>
+            </DialogTitle>
         </Dialog>
     );
 
@@ -30,7 +34,8 @@ function Cart(props){
 
 const mapStateToProps = state =>{
     return{
-        cartActive : state.cartActive
+        cartActive : state.cartActive,
+        activeUserDetail : state.activeUserDetail
     }
 }
 const mapDispatchToProps = dispatch =>{

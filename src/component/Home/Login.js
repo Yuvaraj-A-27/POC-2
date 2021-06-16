@@ -1,4 +1,4 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle, makeStyles, TextField, useMediaQuery, useTheme } from '@material-ui/core'
+import { Dialog, DialogActions, DialogContent, DialogTitle, makeStyles, TextField } from '@material-ui/core'
 import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
@@ -18,23 +18,18 @@ const useStyles = makeStyles((theme)=>({
         margin: theme.spacing(3),
         marginTop:'-30px'
     },
-    input:{
-        marginTop:theme.spacing(2),
-        marginRight:theme.spacing(0),
-        width: '100%',
-        marginLeft:theme.spacing(0)
-    }
+    dialogPaper:{
+        maxWidth: '400px',
+        maxHeight: '1800px',
+        minHeight: '300px',
+    },
 }))
 
 function Login(props){
     let history = useHistory()
 
-
     //Style
     const classes = useStyles()
-    const theme = useTheme()
-    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
 
     //State and eventHandler
     const[userName, setUserName] = useState('')
@@ -58,25 +53,33 @@ function Login(props){
     }
 
     return(
-        <Dialog fullScreen={fullScreen} open={props.loginActive} onClose={props.loginActiveAction}>
+    <div data-testid = {props.dataTestid}>
+        <Dialog fullWidth='true' maxWidth ='lg' open={props.loginActive} onClose={props.loginActiveAction} classes={{ paperWidthLg: classes.dialogPaper }}>
             <DialogTitle className={classes.title}>Login</DialogTitle>
                 <form>
                     <DialogContent className={classes.content}>
-                        <TextField 
-                            className={classes.input} 
+                        <TextField
                             label="User Name"
-                            variant='outlined'
-                            value={userName}
+                            style={{ marginBottom: '20px' }}
+                            fullWidth
+                            size = 'medium'
+                            margin="dense"
+                            variant="outlined"
+                            value = {userName}
                             onChange = {(e)=>setUserName(e.target.value)}
-                        /><br/>
-                        <TextField 
-                            className={classes.input}
-                            type="password" 
-                            label="Password" 
-                            variant='outlined'
+                        />
+                        <TextField
+                            label="Password"
+                            style={{ marginTop: 5 }}
+                            fullWidth
+                            type = 'password'
+                            size = 'medium'
+                            margin="dense"
+                            variant="outlined"
                             value = {password}
                             onChange = {(e)=> setPassword(e.target.value)}
-                        /><br/>
+                        />
+                        
                     </DialogContent>
                     <DialogActions>
                         <Button 
@@ -90,6 +93,7 @@ function Login(props){
                     </DialogActions>
                 </form>
         </Dialog>
+    </div>
     )
 }
 

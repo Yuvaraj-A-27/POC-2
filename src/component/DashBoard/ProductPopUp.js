@@ -76,7 +76,7 @@ function ProductPopUp(props){
     const productRender = product[0]
 
     const addToCartHandler =()=>{
-        props.addToCart(props.currentProduct)
+        props.addToCart(props.currentProduct,props.activeUserDetail[0].id)
     }
 
     return (
@@ -124,13 +124,14 @@ const mapStateToProps = state =>{
         productPopUpActive : state.productPopUpActive,
         currentProduct : state.currentProduct,
         productList : state.product,
+        activeUserDetail : state.activeUserDetail
     }
 }
 
 const mapDispatchToProps = dispatch =>{
     return{
         productPopUpActiveHandler : ()=> dispatch(productPopUpActive()),
-        addToCart : (id) => dispatch(addToCart(id))
+        addToCart : (productId, userId) => dispatch(addToCart(productId, userId))
     }
 }
 
