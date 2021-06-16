@@ -1,7 +1,7 @@
 import { Card, CardActionArea, CardContent, CardMedia, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { connect } from 'react-redux';
-import {loginActive} from '../../Store/Action'
+import {currentProduct, loginActive, productPopUpActive} from '../../Store/Action'
 
 const useStyles = makeStyles(()=>({
     card:{
@@ -20,11 +20,16 @@ const useStyles = makeStyles(()=>({
     },
 }))
 
-function ProductCard({image, title, loginActive}){
+function ProductCard({product_id,image, title, loginActive, activeUser,productPopUpActiveHandler,currentProductHandler}){
     const classes = useStyles()
 
+    const productPopUpHandler = ()=>{
+        productPopUpActiveHandler()
+        currentProductHandler(product_id)
+    }
+
     return(
-            <Card className ={classes.card} onClick={loginActive}>
+            <Card className ={classes.card} onClick={activeUser.length!==0?productPopUpHandler:loginActive}>
                  <CardActionArea>
                      <CardMedia 
                          className={classes.cardMedia}
@@ -41,10 +46,18 @@ function ProductCard({image, title, loginActive}){
     )
 }
 
-const mapDispatchToProps = dispatch =>{
+const mapStateToProps = state =>{
     return{
-        loginActive : ()=>dispatch(loginActive())
+        activeUser : state.activeUserDetail
     }
 }
 
-export default connect(null, mapDispatchToProps)(ProductCard);
+const mapDispatchToProps = dispatch =>{
+    return{
+        loginActive : ()=>dispatch(loginActive()),
+        productPopUpActiveHandler : ()=> dispatch(productPopUpActive()),
+        currentProductHandler : (value)=> dispatch(currentProduct(value))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

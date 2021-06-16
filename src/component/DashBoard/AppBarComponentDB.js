@@ -10,6 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
+import { activeUser } from '../../Store/Action';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -44,6 +45,7 @@ function AppBarComponentDB(props) {
 
   const logoutHandler = ()=>{
     localStorage.removeItem('token')
+    props.activeUserHandler('')
     history.push('/')
   }
 
@@ -107,4 +109,10 @@ const mapStateToProps = state =>{
   }
 }
 
-export default connect(mapStateToProps,null)(AppBarComponentDB)
+const mapDispatchToProps = dispatch =>{
+  return{
+    activeUserHandler : (value)=>dispatch(activeUser(value))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(AppBarComponentDB)
