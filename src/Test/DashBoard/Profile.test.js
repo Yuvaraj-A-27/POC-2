@@ -9,7 +9,7 @@ import { profileActive } from '../../Store/Action'
 
 const middleware  = {}
 const mockStore = configureStore(middleware)
-const initialState = {}
+const initialState =  {}
 const Store = mockStore(initialState)
 
 
@@ -34,11 +34,14 @@ const Store = mockStore(initialState)
 // }]
 
 test('Profile component snapshot test', ()=>{
-    const {} = render(
+    const {getByTestId} = render(
         <Provider store={Store}>
             <Profile />
         </Provider>
     )
+
+    // expect(getByTestId('userId')).toBeInTheDocument()
+
     // setTimeout(() => {
     //     const profileActive = ()=>({type:PROFILE_ACTIVE})
     //     Store.dispatch(profileActive)

@@ -46,7 +46,10 @@ function Product(props){
 
     const product = useSelector(state=>state.product)
     console.log(product);
-    const allProduct = product? product.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title} />)) : null
+    const allProduct = product.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title} />))
+
+
+    // const allProduct = product? product.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title} />)) : null
 
     const electronics = product? product.filter((e)=> e.category==='electronics') : null
     const electronicsProduct = electronics? electronics.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title}/>)) :null
