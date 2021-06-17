@@ -41,26 +41,26 @@ const useStyles = makeStyles((theme)=>({
     
 }))
 
-function Product(){
+function Product(props){
     const classes = useStyles()
 
     const product = useSelector(state=>state.product)
-    
-    const allProduct = product.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title} />))
+    console.log(product);
+    const allProduct = product? product.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title} />)) : null
 
-    const electronics = product.filter((e)=> e.category==='electronics')
-    const electronicsProduct = electronics.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title}/>))
+    const electronics = product? product.filter((e)=> e.category==='electronics') : null
+    const electronicsProduct = electronics? electronics.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title}/>)) :null
 
-    const jewelerys = product.filter((e)=> e.category==='jewelery')
-    const jeweleryProduct = jewelerys.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title}/>))
+    const jewelerys = product? product.filter((e)=> e.category==='jewelery') : null
+    const jeweleryProduct = jewelerys? jewelerys.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title}/>)) : null
 
-    const menClothings = product.filter((e)=> e.category==="men's clothing")
-    const menClothingProduct = menClothings.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title}/>))
+    const menClothings = product? product.filter((e)=> e.category==="men's clothing") : null
+    const menClothingProduct = menClothings? menClothings.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title}/>)) : null
 
-    const womenClothings = product.filter((e)=> e.category==="women's clothing")
-    const womenClothingProduct = womenClothings.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title}/>))
+    const womenClothings = product? product.filter((e)=> e.category==="women's clothing") : null
+    const womenClothingProduct = womenClothings? womenClothings.map((e)=>(<ProductCard key={e.id} product_id = {e.id} image= {e.image} title={e.title}/>)) : null
     return(
-        <div>
+        <div data-testid = {props.dataTestid}>
             <Typography className={classes.heading} variant ='h5'>All Products</Typography>
                 <Carousel breakPoints={breakPoints}>
                     {allProduct}

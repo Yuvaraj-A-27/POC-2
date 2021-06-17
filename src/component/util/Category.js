@@ -41,10 +41,11 @@ const useStyles = makeStyles((theme)=>({
         
     },
     paper:{
-        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        background: 'linear-gradient(45deg, #f2b8fc 30%, #ed87ff 90%)',
         fontSize : 28,
         padding: '2px 20px 0px 20px',
         color: 'white',
+        // color: 'linear-gradient(45deg, #080808 30%, #080808 90%)',
         height : '10%',
         transition : 'transform 0.5s',
         '&:hover':{
@@ -53,11 +54,12 @@ const useStyles = makeStyles((theme)=>({
     },
     aHref:{
         textDecoration : 'none',
+        // color: 'linear-gradient(45deg, #080808 30%, #080808 90%)',
         color: 'white',
     }
 }))
 
-function Category(){
+function Category(props){
     const classes = useStyles()
 
     let category = useSelector(state => state.category)
@@ -69,7 +71,7 @@ function Category(){
         ))
     }
     return(
-        <div>
+        <div data-testid={props.dataTestid}>
             <Typography className={classes.heading} variant ='h5'>Category</Typography>
             <div className={classes.paperDiv}>
                 {categories}
