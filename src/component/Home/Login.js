@@ -2,7 +2,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, makeStyles, TextFiel
 import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
-import { activeUser, loginActive } from '../../Store/Action';
+import { activeUser, loginActive, loginError, loginErrorTyping } from '../../Store/Action';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 
@@ -38,18 +38,43 @@ function Login(props){
 
     const loginHandler = (e)=>{
         e.preventDefault()
-        axios.post("https://fakestoreapi.com/auth/login", {
-            username : userName,
-            password : password
-        })
-        .then((res)=>{
-            localStorage.setItem('token',res.data.token)
-            let activeUser = props.userDetail.filter(e => e.username===userName)
-            props.activeUser(activeUser)
-            props.loginActiveAction()
-            history.push('/dashboard')
-        })
-        .catch((err)=>console.log(err))
+        if(userName && password){
+            axios.post("https://fakestoreapi.com/auth/login", {
+                username : userName,
+                password : password
+            })
+            .then((res)=>{
+                console.log(res.data.token);
+                if(res.data.token){
+                    localStorage.setItem('token',res.data.token)
+                    let activeUser = props.userDetail.filter(e => e.username===userName)
+                    props.activeUser(activeUser)
+                    props.loginActiveAction()
+                    history.push('/dashboard')
+                    props.loginErrorTypingHandler()
+                }
+                else{
+                    props.loginErrorHandler()
+                }
+            })
+            .catch((err)=>console.log(err))
+        }
+        else{
+            props.loginErrorHandler()
+        }
+        
+    }
+
+    const err = props.loginError? 'error' : null
+
+    const userNameHandler =(e)=>{
+        setUserName(e.target.value)
+        props.loginErrorTypingHandler()
+    }
+    
+    const passwordHandler = (e)=>{
+        setPassword(e.target.value)
+        props.loginErrorTypingHandler()
     }
 
     return(
@@ -59,6 +84,7 @@ function Login(props){
                 <form>
                     <DialogContent className={classes.content}>
                         <TextField
+                            error={err}
                             label="User Name"
                             style={{ marginBottom: '20px' }}
                             fullWidth
@@ -66,10 +92,11 @@ function Login(props){
                             margin="dense"
                             variant="outlined"
                             value = {userName}
-                            onChange = {(e)=>setUserName(e.target.value)}
+                            onChange = {userNameHandler}
                             data-testid = 'login-username'
                         />
                         <TextField
+                            error={err}
                             label="Password"
                             style={{ marginTop: 5 }}
                             fullWidth
@@ -78,7 +105,7 @@ function Login(props){
                             margin="dense"
                             variant="outlined"
                             value = {password}
-                            onChange = {(e)=> setPassword(e.target.value)}
+                            onChange = {passwordHandler}
                         />
                         
                     </DialogContent>
@@ -101,14 +128,17 @@ function Login(props){
 const mapStateToProps = state =>{
     return{
         loginActive : state.loginActive,
-        userDetail : state.userDetail
+        userDetail : state.userDetail,
+        loginError : state.loginError
     }
 }
 
 const mapDispatchToProps = dispatch =>{
     return{
         loginActiveAction : ()=>dispatch(loginActive()),
-        activeUser : (value)=> dispatch(activeUser(value))
+        activeUser : (value)=> dispatch(activeUser(value)),
+        loginErrorHandler : ()=>dispatch(loginError()),
+        loginErrorTypingHandler : () =>dispatch(loginErrorTyping())
     }
 }
 

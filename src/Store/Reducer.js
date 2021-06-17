@@ -1,4 +1,4 @@
-import { ACTIVE_USER, ADD_TO_CART, CART_ACTIVE, CREATE_USER, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LOGIN_ACTIVE, PRODUCT_POP_ACTIVE, PROFILE_ACTIVE, REGISTER_ACTIVE } from "./ActionType";
+import { ACTIVE_USER, ADD_TO_CART, CART_ACTIVE, CREATE_USER, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LOGIN_ACTIVE, LOGIN_ERROR, LOGIN_ERROR_TYPING, PRODUCT_POP_ACTIVE, PROFILE_ACTIVE, REGISTER_ACTIVE } from "./ActionType";
 
 const initialState ={
     category : [],
@@ -9,6 +9,7 @@ const initialState ={
     profileActive : false,
     cartActive : false,
     registerActive : false,
+    loginError : false,
     activeUserDetail : '',
     currentProduct : 1,
     cart:[],
@@ -94,6 +95,16 @@ const Reducer = (state = initialState, action)=>{
         case CREATE_USER : return{
             ...state,
             userDetail : [...state.userDetail, action.payload]
+        }
+
+        case LOGIN_ERROR : return{
+            ...state,
+            loginError : !state.loginError
+        }
+
+        case LOGIN_ERROR_TYPING : return{
+            ...state,
+            loginError : false
         }
 
         default : return state

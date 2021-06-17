@@ -64,7 +64,7 @@ function Home(props){
             }
         }
         datafetch()
-      },[props])
+      })
 
     return(
         <div>
