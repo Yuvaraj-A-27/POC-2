@@ -11,10 +11,10 @@ const useStyles = makeStyles(()=>({
         height: '30px',
     },
     image:{
-        width: '20%',
+        width: '200px',
         marginTop: '-100vh',
         marginLeft : '600px',
-        paddingBottom: '50px'
+        paddingBottom: '90px'
     },
     icon:{
         marginTop:'-20px'
@@ -40,14 +40,18 @@ const useStyles = makeStyles(()=>({
     },
     dialogPaper:{
         maxWidth: '1280px',
-        maxHeight: '2000px',
+        maxHeight: '550px',
         minHeight: '550px',
     },
     emptyDiv2:{
         background: '#0212f0',
         width: '.8%',
-        marginTop:'-200px',
+        marginRight: '200px',
+        marginTop: '-250px',
         minHeight:'250px',
+        justifyItems:'left',
+        display: 'flex',
+        position:'static'
     },
     addcartIcon:{
         color: 'white',
@@ -63,6 +67,9 @@ const useStyles = makeStyles(()=>({
         fontSize:'20px',
         marginTop:'208px',
         marginLeft:'10px'
+    },
+    price:{
+        marginLeft:'25px'
     }
 }))
 
@@ -93,24 +100,27 @@ function ProductPopUp(props){
                     MyStore
                 </h1>
             </DialogTitle>
+            {/* <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper> */}
 
             <DialogContent>
                 <Paper elevation={3} className={classes.emptyDiv}>&ensp;
                     <AddCircleOutlineIcon onClick={addToCartHandler} className={classes.addcartIcon} />
                     <h4 className={classes.addCartText} >Add to Cart</h4>
-                 </Paper>
+                </Paper>
 
                 <img className={classes.image} src={productRender.image} alt={productRender.id} />
                 <h4 className={classes.productTitle}>{productRender.title}</h4>
             
             <DialogContentText >
                 <p className={classes.detailDiv}>{productRender.description}</p>
-                <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper>
             </DialogContentText>
 
                 <h2 className={classes.price}>Price - ${productRender.price}</h2>
+                <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper>
                 
             </DialogContent>
+            {/* <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper> */}
+
         </Dialog>
     );
     }

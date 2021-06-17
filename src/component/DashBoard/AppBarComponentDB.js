@@ -68,7 +68,7 @@ function AppBarComponentDB(props) {
 
 
   return (
-    <div className={classes.grow} id = {props.id}>
+    <div className={classes.grow} data-testid={props.dataTestid} id = {props.id}>
       <AppBar position="static">
         <Toolbar>
             <IconButton

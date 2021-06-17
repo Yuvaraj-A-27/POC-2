@@ -32,39 +32,40 @@ function Home(props){
 
     const classes = useStyles()
 
-    useEffect(()=>{
-        async function datafetch(){
-            try{
-                let resCategory = await axios.get("https://fakestoreapi.com/products/categories")
-                if(resCategory){
-                    props.initialCategory(resCategory.data)
-                }
-            }
-            catch(err){
-                console.log(err);
-            }
-
-            try{
-                let resProduct = await axios.get("https://fakestoreapi.com/products")
-                if(resProduct){
-                    props.initialProduct(resProduct.data)
-                }
-            }
-            catch(err){
-                console.log(err);
-            }
-            try{
-                let res = await axios.get("https://fakestoreapi.com/users")
-                if(res){
-                    props.initialUserDetail(res.data)
-                }
-            }
-            catch(err){
-                console.log(err);
+    async function datafetch(){
+        try{
+            let resCategory = await axios.get("https://fakestoreapi.com/products/categories")
+            if(resCategory){
+                props.initialCategory(resCategory.data)
             }
         }
+        catch(err){
+            console.log(err);
+        }
+
+        try{
+            let resProduct = await axios.get("https://fakestoreapi.com/products")
+            if(resProduct){
+                props.initialProduct(resProduct.data)
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+        try{
+            let res = await axios.get("https://fakestoreapi.com/users")
+            if(res){
+                props.initialUserDetail(res.data)
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    
+    useEffect(()=>{
         datafetch()
-      })
+    },[])
 
     return(
         <div>
