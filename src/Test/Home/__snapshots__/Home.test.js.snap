@@ -185,12 +185,123 @@ exports[`Home Component Testing 1`] = `
                   "flexDirection": "row",
                 }
               }
-            />
+            >
+              <div
+                className="rec rec-carousel-item rec-carousel-item-0 rec-carousel-item-visible"
+              >
+                <div
+                  className="sc-gtsrHT cAlXfM rec rec-item-wrapper"
+                  id={0}
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "padding": "0px 0px 0px 0px",
+                      "width": "0px",
+                    }
+                  }
+                >
+                  <div
+                    className="MuiPaper-root MuiCard-root makeStyles-card-14 MuiPaper-elevation1 MuiPaper-rounded"
+                    onClick={[Function]}
+                  >
+                    <button
+                      className="MuiButtonBase-root MuiCardActionArea-root"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      tabIndex={0}
+                      type="button"
+                    >
+                      <div
+                        className="MuiCardMedia-root makeStyles-cardMedia-15"
+                      />
+                      <div
+                        className="MuiCardContent-root"
+                      >
+                        <h2
+                          className="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                        />
+                      </div>
+                      <span
+                        className="MuiCardActionArea-focusHighlight"
+                      />
+                      <span
+                        className="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="rec rec-carousel-item rec-carousel-item-1 rec-carousel-item-hidden rec-carousel-item-next"
+              >
+                <div
+                  className="sc-gtsrHT cAlXfM rec rec-item-wrapper"
+                  id={1}
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "padding": "0px 0px 0px 0px",
+                      "width": "0px",
+                    }
+                  }
+                >
+                  <div
+                    className="MuiPaper-root MuiCard-root makeStyles-card-14 MuiPaper-elevation1 MuiPaper-rounded"
+                    onClick={[Function]}
+                  >
+                    <button
+                      className="MuiButtonBase-root MuiCardActionArea-root"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onDragLeave={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      tabIndex={0}
+                      type="button"
+                    >
+                      <div
+                        className="MuiCardMedia-root makeStyles-cardMedia-15"
+                      />
+                      <div
+                        className="MuiCardContent-root"
+                      >
+                        <h2
+                          className="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+                        />
+                      </div>
+                      <span
+                        className="MuiCardActionArea-focusHighlight"
+                      />
+                      <span
+                        className="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <button
-          className="sc-bdnxRM ehkxHv rec rec-arrow rec rec-arrow-right"
-          disabled={true}
+          className="sc-bdnxRM cGKbZh rec rec-arrow rec rec-arrow-right"
+          disabled={false}
           onClick={[Function]}
           style={Object {}}
           tabIndex={0}
@@ -206,6 +317,12 @@ exports[`Home Component Testing 1`] = `
           className="sc-gKAaRy ejXxNI rec rec-dot rec rec-dot_active"
           onClick={[Function]}
           tabIndex={-1}
+          type="button"
+        />
+        <button
+          className="sc-gKAaRy jLgnwX rec rec-dot "
+          onClick={[Function]}
+          tabIndex={0}
           type="button"
         />
       </div>

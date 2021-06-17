@@ -78,8 +78,8 @@ function Login(props){
     }
 
     return(
-    <div data-testid = {props.dataTestid}>
-        <Dialog fullWidth='true' maxWidth ='lg' open={props.loginActive} onClose={props.loginActiveAction} classes={{ paperWidthLg: classes.dialogPaper }}>
+    <div data-testid = {props.dataTestid}>        
+        <Dialog data-testid = 'login-div' fullWidth='true' maxWidth ='lg' open={props.loginActive} onClose={props.loginActiveAction} classes={{ paperWidthLg: classes.dialogPaper }}>
             <DialogTitle className={classes.title}>Login</DialogTitle>
                 <form>
                     <DialogContent className={classes.content}>
@@ -87,18 +87,19 @@ function Login(props){
                             error={err}
                             label="User Name"
                             style={{ marginBottom: '20px' }}
+                            placeholder = 'User Name'
                             fullWidth
                             size = 'medium'
                             margin="dense"
                             variant="outlined"
                             value = {userName}
                             onChange = {userNameHandler}
-                            data-testid = 'login-username'
                         />
                         <TextField
                             error={err}
                             label="Password"
                             style={{ marginTop: 5 }}
+                            placeholder = 'password'
                             fullWidth
                             type = 'password'
                             size = 'medium'
@@ -116,6 +117,7 @@ function Login(props){
                             color="primary" 
                             className={classes.margin}
                             onClick = {loginHandler}
+                            placeholder = 'login-btn'
                         >Login
                         </Button>
                     </DialogActions>

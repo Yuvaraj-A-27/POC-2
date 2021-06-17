@@ -7,11 +7,13 @@ import renderer from 'react-test-renderer'
 
 const middleware  = {}
 const mockStore = configureStore(middleware)
+const initialState = {
+    product : ['bat', 'ball'],
+    activeUserDetail : 'yuvaraj'
+}
+const Store = mockStore(initialState)
 
 test('Home Component Testing',()=>{
-
-    const initialState = {}
-    const Store = mockStore(initialState)
 
     const {getByTestId} = render(
         <Provider store={Store}>
