@@ -1,5 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Login Component Test Login Component snapShot test 1`] = `<div />`;
-
-exports[`Login Component Test Login Functionality Test 1`] = `<div />`;

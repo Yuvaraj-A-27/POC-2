@@ -29,13 +29,13 @@ describe('Login Component Test', ()=>{
         Store.dispatch(loginActive())
         expect(Store.getActions()).toEqual([{type:LOGIN_ACTIVE}])
 
-        const login = renderer.create(
-            <Provider store={Store}>
-                {/* <AppBarComponent/> */}
-                <Login />
-            </Provider>
-        ).toJSON()
-        expect(login).toMatchSnapshot()
+        // const login = renderer.create(
+        //     <Provider store={Store}>
+        //         {/* <AppBarComponent/> */}
+        //         <Login />
+        //     </Provider>
+        // ).toJSON()
+        // expect(login).toMatchSnapshot()
 
         
         // const username = getByTestId('login-username')

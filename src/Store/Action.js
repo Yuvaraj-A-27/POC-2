@@ -1,4 +1,4 @@
-import { ACTIVE_USER, ADD_TO_CART, CART_ACTIVE, CREATE_USER, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LOGIN_ACTIVE, PRODUCT_POP_ACTIVE, PROFILE_ACTIVE, REGISTER_ACTIVE } from "./ActionType"
+import { ACTIVE_USER, ADD_TO_CART, CART_ACTIVE, CREATE_USER, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LOGIN_ACTIVE, LOGIN_ERROR, LOGIN_ERROR_TYPING, PRODUCT_POP_ACTIVE, PROFILE_ACTIVE, REGISTER_ACTIVE } from "./ActionType"
 
 export const initialCategory = (value) =>{
     return{
@@ -80,5 +80,17 @@ export const createUser = (value) =>{
     return{
         type : CREATE_USER,
         payload : value
+    }
+}
+
+export const loginError = ()=>{
+    return{
+        type : LOGIN_ERROR
+    }
+}
+
+export const loginErrorTyping = () =>{
+    return{
+        type : LOGIN_ERROR_TYPING
     }
 }

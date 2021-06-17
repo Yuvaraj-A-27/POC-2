@@ -72,6 +72,7 @@ function Register(props){
         // .then(res => console.log(res))
     }
     // console.log(props.userDetail);
+    
     return(
     <div data-tesid={props.dataTestid}>
         <Dialog fullWidth='true' maxWidth ='lg' open={props.registerActive} onClose={props.registerActiveHandler} classes={{ paperWidthLg: classes.dialogPaper }}>
