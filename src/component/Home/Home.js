@@ -14,7 +14,7 @@ import Register from "./Register";
 const useStyles = makeStyles(()=>({
     upArrow:{
         position: 'sticky',
-        background:'#6b56e3' ,
+        background:'#2c0ccc' ,
         bottom: '7%',
         width: '80px',
         height: '60px',

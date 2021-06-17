@@ -19,7 +19,8 @@ function Profile(props){
     const classes = useStyles()
 
     console.log(props.activeUserDetail);
-    const detail = props.activeUserDetail[0]
+    const detail = props.activeUserDetail? props.activeUserDetail[0]  : null
+    if(detail){
     return(
         <Dialog
         open={props.profileActive}
@@ -90,7 +91,8 @@ function Profile(props){
             </DialogContent>
         </Dialog>
     );
-
+    }
+    return null   // to avoid error in testing  --- undefined and null error
 }
 
 const mapStateToProps = state =>{

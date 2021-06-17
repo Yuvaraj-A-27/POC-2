@@ -8,12 +8,13 @@ import ProductPopUp from './ProductPopUp'
 import Search from './Search'
 import Profile from './Profile'
 import Cart from './Cart'
+import { useHistory } from 'react-router'
 
 
 const useStyles = makeStyles(()=>({
     upArrow:{
         position: 'sticky',
-        background:'#6b56e3' ,
+        background:'#2c0ccc' ,
         bottom: '7%',
         width: '80px',
         height: '60px',
@@ -29,6 +30,13 @@ const useStyles = makeStyles(()=>({
 
 function DashBoard(){
     const classes = useStyles()
+    const history = useHistory()
+
+    if(localStorage.getItem('token')===null){
+        history.push('/')
+        // console.log('running');
+    }
+    else{
     return(
         <div>
             <AppBarComponentDB id='Appbar'/>
@@ -41,6 +49,8 @@ function DashBoard(){
             <a href='#Appbar'><NavigationIcon className={classes.upArrow} /></a>    
         </div>
     )
+    }
+
 }
 
 export default DashBoard

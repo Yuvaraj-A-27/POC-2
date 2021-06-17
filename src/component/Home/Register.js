@@ -38,7 +38,7 @@ function Register(props){
         password : '',
         firstname : '',
         lastname : '',
-        number : 0,
+        number : '',
         street : '',
         city : '',
         zipcode : '',

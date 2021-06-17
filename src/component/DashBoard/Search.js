@@ -25,15 +25,29 @@ function Search(props){
     //state
     const [search, setSearch] = useState('')
 
-    let result = props.productDetail.filter(e=>{
+    let result = props.productDetail? props.productDetail.filter(e=>{
         const title = e.title.toLowerCase()
         const description = e.description.toLowerCase()
         return (title.includes(search.toLowerCase()) || description.includes(search.toLowerCase()))
-    })
-    console.log(result);
+    }) : null
+    // console.log(result);
     
-    const resultProduct = result.map(e=>(<ProductCard product_id ={e.id} title={e.title} image={e.image}/>))
+    const resultProduct =result? result.map(e=>(<ProductCard product_id ={e.id} title={e.title} image={e.image}/>)) : null
 
+    let carousel = null
+    if(result && result.length<15 && search.length>0 && resultProduct.length!==0){
+        carousel=<Carousel breakPoints={breakPoints}>
+            {resultProduct}    
+        </Carousel>
+    }
+    
+
+    let notFound = null
+    if(result && resultProduct.length===0 && search.length >0){
+        notFound = <p data-testid = 'not-found'>Oops! Sorry, Your Search Product is not Available</p>
+    }
+    
+    
 
     return(
         <div>
@@ -51,17 +65,20 @@ function Search(props){
                         variant="outlined"
                         value = {search}
                         onChange = {e=>setSearch(e.target.value)}
+                        // data-testid = 'search-input'
                     />
                 </Grid>
             </Grid>
-            {result.length<15 && search.length>0 && resultProduct.length!==0 &&
+            {/* {result.length<15 && search.length>0 && resultProduct.length!==0 &&
                 <Carousel breakPoints={breakPoints}>
                     {resultProduct}    
                 </Carousel>
-            }
-            {resultProduct.length===0 && search.length >0 &&
+            } */}
+            {carousel}
+            {/* {resultProduct.length===0 && search.length >0 &&
                 <p>Oops! Sorry, Your Search Product is not Available</p>
-            }
+            } */}
+            {notFound}
             
         </div>
     )

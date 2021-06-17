@@ -67,6 +67,7 @@ function Login(props){
                             variant="outlined"
                             value = {userName}
                             onChange = {(e)=>setUserName(e.target.value)}
+                            data-testid = 'login-username'
                         />
                         <TextField
                             label="Password"
