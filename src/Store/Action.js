@@ -83,14 +83,14 @@ export const createUser = (value) =>{
     }
 }
 
-export const loginError = ()=>{
-    return{
-        type : LOGIN_ERROR
-    }
-}
+// export const loginError = ()=>{
+//     return{
+//         type : LOGIN_ERROR
+//     }
+// }
 
-export const loginErrorTyping = () =>{
-    return{
-        type : LOGIN_ERROR_TYPING
-    }
-}
+// export const loginErrorTyping = () =>{
+//     return{
+//         type : LOGIN_ERROR_TYPING
+//     }
+// }

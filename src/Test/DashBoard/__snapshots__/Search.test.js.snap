@@ -49,6 +49,7 @@ exports[`DashBoard Search Test Search snapshot test 1`] = `
             onBlur={[Function]}
             onChange={[Function]}
             onFocus={[Function]}
+            placeholder="Search for Product"
             required={false}
             type="text"
             value=""

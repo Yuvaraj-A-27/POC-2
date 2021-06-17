@@ -202,6 +202,7 @@ exports[`Home Component Testing 1`] = `
                 >
                   <div
                     className="MuiPaper-root MuiCard-root makeStyles-card-14 MuiPaper-elevation1 MuiPaper-rounded"
+                    data-testid="productCard"
                     onClick={[Function]}
                   >
                     <button
@@ -257,6 +258,7 @@ exports[`Home Component Testing 1`] = `
                 >
                   <div
                     className="MuiPaper-root MuiCard-root makeStyles-card-14 MuiPaper-elevation1 MuiPaper-rounded"
+                    data-testid="productCard"
                     onClick={[Function]}
                   >
                     <button

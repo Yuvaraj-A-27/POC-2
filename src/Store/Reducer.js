@@ -9,7 +9,7 @@ const initialState ={
     profileActive : false,
     cartActive : false,
     registerActive : false,
-    loginError : false,
+    // loginError : false,
     activeUserDetail : '',
     currentProduct : 1,
     cart:[],
@@ -97,15 +97,15 @@ const Reducer = (state = initialState, action)=>{
             userDetail : [...state.userDetail, action.payload]
         }
 
-        case LOGIN_ERROR : return{
-            ...state,
-            loginError : !state.loginError
-        }
+        // case LOGIN_ERROR : return{
+        //     ...state,
+        //     loginError : true
+        // }
 
-        case LOGIN_ERROR_TYPING : return{
-            ...state,
-            loginError : false
-        }
+        // case LOGIN_ERROR_TYPING : return{
+        //     ...state,
+        //     loginError : false
+        // }
 
         default : return state
     }

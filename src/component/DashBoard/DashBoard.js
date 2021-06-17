@@ -39,14 +39,14 @@ function DashBoard(){
     else{
     return(
         <div>
-            <AppBarComponentDB id='Appbar'/>
+            <AppBarComponentDB dataTestid='AppBar' id='Appbar'/>
             <Search />
             <ProductPopUp />
             <Profile />
             <Cart />
-            <Category />
-            <Product />
-            <a href='#Appbar'><NavigationIcon className={classes.upArrow} /></a>    
+            <Category dataTestid = 'Category' />
+            <Product dataTestid = 'Product' />
+            <a href='#Appbar'><NavigationIcon data-testid='navIcon' className={classes.upArrow} /></a>    
         </div>
     )
     }
