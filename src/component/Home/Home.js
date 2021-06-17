@@ -32,35 +32,30 @@ function Home(props){
 
     const classes = useStyles()
 
-    async function datafetch(){
-        try{
-            let resCategory = await axios.get("https://fakestoreapi.com/products/categories")
-            if(resCategory){
-                props.initialCategory(resCategory.data)
-            }
-        }
-        catch(err){
-            console.log(err);
-        }
+    function datafetch(){
+        axios.get("https://fakestoreapi.com/products/categories")
+        .then((res) =>{
+            props.initialCategory(res.data)
+        })
+        .catch((error) =>{
+            console.log(error);
+        })
 
-        try{
-            let resProduct = await axios.get("https://fakestoreapi.com/products")
-            if(resProduct){
-                props.initialProduct(resProduct.data)
-            }
-        }
-        catch(err){
-            console.log(err);
-        }
-        try{
-            let res = await axios.get("https://fakestoreapi.com/users")
-            if(res){
-                props.initialUserDetail(res.data)
-            }
-        }
-        catch(err){
-            console.log(err);
-        }
+        axios.get("https://fakestoreapi.com/products")
+        .then((res) =>{
+            props.initialProduct(res.data)
+        })
+        .catch((error) =>{
+            console.log(error);
+        })
+
+        axios.get("https://fakestoreapi.com/users")
+        .then((res) =>{
+            props.initialUserDetail(res.data)
+        })
+        .catch((error) =>{
+            console.log(error);
+        })
     }
     
     useEffect(()=>{
@@ -79,11 +74,6 @@ function Home(props){
     )
 }
 
-const mapStateToProps = state =>{
-    return{
-        loginActive : state.loginActive
-    }
-}
 
 const mapDispatchToProps = dispatch =>{
     return{
@@ -93,4 +83,4 @@ const mapDispatchToProps = dispatch =>{
     }
   }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Home)
+export default connect(null,mapDispatchToProps)(Home)
