@@ -1,7 +1,7 @@
 import {  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, makeStyles, Paper} from '@material-ui/core';
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
-import { addToCart, productPopUpActive } from '../../Store/Action';
+import { addToCart, addToWishList, productPopUpActive } from '../../Store/Action';
 import AppleIcon from '@material-ui/icons/Apple';
 // import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -97,14 +97,30 @@ const useStyles = makeStyles((theme)=>({
 
 function ProductPopUp(props){
     const classes = useStyles()
-
-    //state value 
-    if(props.currentProduct!==0){
+    
+    //state value for wishlist
+    const [wishListHelper, setWishListHelper] = useState(true)
+    
     const product = props.productList.filter((e) => e.id===props.currentProduct)
     const productRender = product[0]
 
     const addToCartHandler =()=>{
         props.addToCart(props.currentProduct,props.activeUserDetail[0].id)
+    }
+
+    const addToWishListHandler =()=>{
+        // setWishListHelper(!wishListHelper)
+        const updatedWishList = props.wishList ? props.wishList.filter((e) => e.productId===props.currentProduct && e.userId===props.activeUserDetail[0].id) : []
+
+        if(updatedWishList.length===0){
+            setWishListHelper(false)
+            props.addToWishList([...props.wishList, {productId : props.currentProduct, userId : props.activeUserDetail[0].id}])
+        }
+        else{
+            setWishListHelper(true)
+            const updatedWishList2 = props.wishList.filter(e => e.productId!==props.currentProduct && e.userId!==props.activeUserDetail[0].id)
+            props.addToWishList(updatedWishList2)
+        }
     }
 
     return (
@@ -126,8 +142,8 @@ function ProductPopUp(props){
                 <Paper elevation={3} className={classes.emptyDiv}>&ensp;
                     <img className={classes.image} src={productRender.image} alt={productRender.id} />
 
-                    <Fab variant="extended" color='secondary' className={classes.favIcon}>
-                        <FavoriteIcon className={classes.extendedIcon1}/>Add to WishList
+                    <Fab variant="extended" color={wishListHelper?'default':'secondary'} onClick = {addToWishListHandler} className={classes.favIcon}>
+                        <FavoriteIcon className={classes.extendedIcon1}/>{wishListHelper?'Add to WishList':'Remove from WishList'}
                     </Fab>
                     <Fab variant="extended" color='default' onClick={addToCartHandler} className={classes.AddIcon}>
                         <AddIcon className={classes.extendedIcon2}/>Add to Cart
@@ -153,10 +169,6 @@ function ProductPopUp(props){
 
         </Dialog>
     );
-    }
-    return(
-        <p>checking</p>
-    )
 }
 
 const mapStateToProps = state =>{
@@ -164,14 +176,16 @@ const mapStateToProps = state =>{
         productPopUpActive : state.productPopUpActive,
         currentProduct : state.currentProduct,
         productList : state.product,
-        activeUserDetail : state.activeUserDetail
+        activeUserDetail : state.activeUserDetail,
+        wishList : state.wishList
     }
 }
 
 const mapDispatchToProps = dispatch =>{
     return{
         productPopUpActiveHandler : ()=> dispatch(productPopUpActive()),
-        addToCart : (productId, userId) => dispatch(addToCart(productId, userId))
+        addToCart : (productId, userId) => dispatch(addToCart(productId, userId)),
+        addToWishList : (value) => dispatch(addToWishList(value))
     }
 }
 

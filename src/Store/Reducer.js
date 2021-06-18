@@ -1,4 +1,4 @@
-import { ACTIVE_USER, ADD_TO_CART, CART_ACTIVE, CREATE_USER, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LEFT_NAVBAR_ACTIVE, LOGIN_ACTIVE, PRODUCT_POP_ACTIVE, PROFILE_ACTIVE, REGISTER_ACTIVE } from "./ActionType";
+import { ACTIVE_USER, ADD_TO_CART, ADD_TO_WISHLIST, CART_ACTIVE, CREATE_USER, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LEFT_NAVBAR_ACTIVE, LOGIN_ACTIVE, PRODUCT_POP_ACTIVE, PROFILE_ACTIVE, REGISTER_ACTIVE, WISHLIST_ACTIVE } from "./ActionType";
 
 const initialState ={
     category : [],
@@ -10,10 +10,12 @@ const initialState ={
     cartActive : false,
     registerActive : false,
     leftNavBarActive : false,
+    wishListActive: false,
     // loginError : false,
     activeUserDetail : '',
     currentProduct : 1,
     cart:[],
+    wishList : []
 }
 
 const Reducer = (state = initialState, action)=>{
@@ -40,6 +42,7 @@ const Reducer = (state = initialState, action)=>{
             profileActive:false,
             cartActive : false,
             registerActive : false,
+            wishListActive: false,
         }
 
         case PRODUCT_POP_ACTIVE: return{
@@ -49,6 +52,7 @@ const Reducer = (state = initialState, action)=>{
             profileActive:false,
             cartActive : false,
             registerActive : false,
+            wishListActive: false,
         }
 
         case ACTIVE_USER: return{
@@ -73,6 +77,7 @@ const Reducer = (state = initialState, action)=>{
             productPopUpActive:false,
             cartActive : false,
             registerActive : false,
+            wishListActive: false,
         }
 
         case CART_ACTIVE: return{
@@ -82,6 +87,7 @@ const Reducer = (state = initialState, action)=>{
             productPopUpActive:false,
             profileActive : false,
             registerActive : false,
+            wishListActive: false,
         }
 
         case REGISTER_ACTIVE : return{
@@ -90,7 +96,8 @@ const Reducer = (state = initialState, action)=>{
             cartActive : false,
             loginActive : false,
             productPopUpActive:false,
-            profileActive : false
+            profileActive : false,
+            wishListActive: false,
         }
 
         case CREATE_USER : return{
@@ -101,6 +108,21 @@ const Reducer = (state = initialState, action)=>{
         case LEFT_NAVBAR_ACTIVE : return{
             ...state,
             leftNavBarActive : !state.leftNavBarActive
+        }
+
+        case WISHLIST_ACTIVE : return{
+            ...state,
+            registerActive : false,
+            cartActive : false,
+            loginActive : false,
+            productPopUpActive:false,
+            profileActive : false,
+            wishListActive: !state.wishListActive,
+        }
+
+        case ADD_TO_WISHLIST : return{
+            ...state,
+            wishList : action.payload
         }
 
         // case LOGIN_ERROR : return{

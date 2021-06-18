@@ -10,7 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
-import { activeUser, cartActive, leftNavBarActive, profileActive } from '../../Store/Action';
+import { activeUser, cartActive, leftNavBarActive, profileActive, wishListActive } from '../../Store/Action';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -27,7 +27,9 @@ const useStyles = makeStyles((theme) => ({
   },
   menu:{
     marginTop:'-61%',
-    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      marginTop:'-29%',
+    },
   }
 }));
 
@@ -57,7 +59,7 @@ function AppBarComponentDB(props) {
     >
       <MenuItem onClick={props.profileActiveHandler}>Profile</MenuItem>
       <MenuItem onClick={props.cartActiveHandler}>Cart</MenuItem>
-      <MenuItem onClick=''>Wish List</MenuItem>
+      <MenuItem onClick={props.wishListActiveHandler}>Wish List</MenuItem>
       <MenuItem onClick = {logoutHandler}>Logout</MenuItem>
     </Menu>
   );
@@ -112,7 +114,8 @@ const mapDispatchToProps = dispatch =>{
     activeUserHandler : (value)=>dispatch(activeUser(value)),
     profileActiveHandler : ()=> dispatch(profileActive()),
     cartActiveHandler : () => dispatch(cartActive()),
-    leftNavBarHandler : () =>dispatch(leftNavBarActive())
+    leftNavBarHandler : () =>dispatch(leftNavBarActive()),
+    wishListActiveHandler : () => dispatch(wishListActive())
   }
 }
 
