@@ -1,7 +1,7 @@
 import { AppBar, Button, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import React from 'react';
 import  MenuIcon from '@material-ui/icons/Menu'
-import { loginActive, registerActive } from '../../Store/Action';
+import { leftNavBarActive, loginActive, registerActive } from '../../Store/Action';
 import { connect } from 'react-redux';
 
 
@@ -38,7 +38,7 @@ function AppBarComponent(props){
             <AppBar id={props.id} position="sticky" className={classes.root}>
                 <Toolbar>
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                    <MenuIcon />
+                    <MenuIcon onClick={props.leftNavBarActiveHandler}/>
                 </IconButton>
                 <Typography variant="h5" className={classes.title}>
                     MyStore
@@ -58,7 +58,8 @@ function AppBarComponent(props){
 const mapDispatchToProps = dispatch =>{
     return{
         loginActiveHandler : () => dispatch(loginActive()),
-        registerActiveHandler : ()=>dispatch(registerActive())
+        registerActiveHandler : ()=>dispatch(registerActive()),
+        leftNavBarActiveHandler : () => dispatch(leftNavBarActive())
     }
 }
 

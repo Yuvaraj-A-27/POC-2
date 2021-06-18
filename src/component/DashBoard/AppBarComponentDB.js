@@ -10,7 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
-import { activeUser, cartActive, profileActive } from '../../Store/Action';
+import { activeUser, cartActive, leftNavBarActive, profileActive } from '../../Store/Action';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -77,7 +77,7 @@ function AppBarComponentDB(props) {
                 color="inherit"
                 aria-label="open drawer"
             >
-                    <MenuIcon />
+                    <MenuIcon onClick={props.leftNavBarHandler}/>
             </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             DashBoard - {props.activeUser[0].name.firstname} {props.activeUser[0].name.lastname}
@@ -113,7 +113,8 @@ const mapDispatchToProps = dispatch =>{
   return{
     activeUserHandler : (value)=>dispatch(activeUser(value)),
     profileActiveHandler : ()=> dispatch(profileActive()),
-    cartActiveHandler : () => dispatch(cartActive())
+    cartActiveHandler : () => dispatch(cartActive()),
+    leftNavBarHandler : () =>dispatch(leftNavBarActive())
   }
 }
 

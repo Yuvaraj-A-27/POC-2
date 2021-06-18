@@ -11,10 +11,10 @@ const useStyles = makeStyles(()=>({
         height: '30px',
     },
     image:{
-        width: '200px',
-        marginTop: '-100vh',
-        marginLeft : '600px',
-        paddingBottom: '90px'
+        width: '250px',
+        marginTop: '50px',
+        marginLeft : '-30px',
+        marginBottom: '90px'
     },
     icon:{
         marginTop:'-20px'
@@ -33,7 +33,7 @@ const useStyles = makeStyles(()=>({
         marginLeft:'2%'
     },
     productTitle:{
-        marginTop:'-380px',
+        marginTop:'-270px',
         marginLeft:'2%',
         width:'43%',
 
@@ -47,8 +47,8 @@ const useStyles = makeStyles(()=>({
         background: '#0212f0',
         width: '.8%',
         marginRight: '200px',
-        marginTop: '-250px',
-        minHeight:'250px',
+        marginTop: '-390px',
+        minHeight:'280px',
         justifyItems:'left',
         display: 'flex',
         position:'static'
@@ -56,7 +56,7 @@ const useStyles = makeStyles(()=>({
     addcartIcon:{
         color: 'white',
         marginTop:'207px',
-        marginLeft:'350px',
+        marginLeft:'90px',
         transition : 'transform 0.3s',
         '&:hover':{
             transform: 'translateY(-5px)'
@@ -100,15 +100,16 @@ function ProductPopUp(props){
                     MyStore
                 </h1>
             </DialogTitle>
-            {/* <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper> */}
 
             <DialogContent>
                 <Paper elevation={3} className={classes.emptyDiv}>&ensp;
+                    <img className={classes.image} src={productRender.image} alt={productRender.id} />
+
                     <AddCircleOutlineIcon onClick={addToCartHandler} className={classes.addcartIcon} />
                     <h4 className={classes.addCartText} >Add to Cart</h4>
                 </Paper>
+                <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper>
 
-                <img className={classes.image} src={productRender.image} alt={productRender.id} />
                 <h4 className={classes.productTitle}>{productRender.title}</h4>
             
             <DialogContentText >
@@ -116,10 +117,10 @@ function ProductPopUp(props){
             </DialogContentText>
 
                 <h2 className={classes.price}>Price - ${productRender.price}</h2>
-                <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper>
+                {/* <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper> */}
+                {/* <img className={classes.image} src={productRender.image} alt={productRender.id} /> */}
                 
             </DialogContent>
-            {/* <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper> */}
 
         </Dialog>
     );

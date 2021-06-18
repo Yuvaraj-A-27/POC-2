@@ -63,13 +63,13 @@ function Category(props){
     const classes = useStyles()
 
     let category = useSelector(state => state.category)
-    let categories = null
-    if(category){
-        categories = category.map((e,index)=>(
-            // <Paper className={classes.paper} elevation={3} key={index}>{e}</Paper>
-            <Paper className={classes.paper} elevation={3} key={index}><a className={classes.aHref} href={'#'+e}>{e}</a></Paper>
-        ))
-    }
+    let categories
+    
+    categories = category.map((e,index)=>(
+        // <Paper className={classes.paper} elevation={3} key={index}>{e}</Paper>
+        <Paper className={classes.paper} elevation={3} key={index}><a className={classes.aHref} href={'#'+e}>{e}</a></Paper>
+    ))
+    
     return(
         <div data-testid={props.dataTestid}>
             <Typography className={classes.heading} variant ='h5'>Category</Typography>
