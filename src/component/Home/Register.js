@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { createUser, registerActive } from '../../Store/Action';
 // import axios from 'axios';
 // import { useHistory } from 'react-router';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme)=>({
     margin: {
@@ -411,7 +412,8 @@ function Register(props){
                             helperText = {phoneNoHelper}
                         />
                         {success &&
-                            <Typography align='center' className = {classes.success}>You are Successfully Registered</Typography>
+                            // <Typography align='center' className = {classes.success}>You are Successfully Registered</Typography>
+                            <Alert severity = 'success'>You are Successfully Registered</Alert>
                         }
                     </DialogContent>
                     <DialogActions>

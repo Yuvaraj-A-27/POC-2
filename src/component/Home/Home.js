@@ -9,6 +9,7 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 import { makeStyles } from "@material-ui/core";
 import Login from "./Login";
 import Register from "./Register";
+import LeftNavBar from "../util/LeftNavBar";
 
 
 const useStyles = makeStyles(()=>({
@@ -70,6 +71,7 @@ function Home(props){
             <a href='#Appbar'><NavigationIcon data-testid='navIcon' className={classes.upArrow} /></a>    
             <Login dataTestid='Login' />
             <Register dataTestid = 'Register' />
+            <LeftNavBar />
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import { Dialog, DialogActions, DialogTitle, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import React from 'react'
 import { connect } from 'react-redux';
-import { cartActive } from '../../Store/Action';
+import { wishListActive } from '../../Store/Action';
 
 const useStyles = makeStyles(()=>({
     dialogPaper:{
@@ -15,7 +15,7 @@ const useStyles = makeStyles(()=>({
     }
 }))
 
-function Cart(props){
+function WishList(props){
     const classes = useStyles()
 
     const cartOfCurrentUser = props.cart.filter(e=> e.userId===props.activeUserDetail[0].id)
@@ -57,15 +57,15 @@ function Cart(props){
 
     return(
         <Dialog
-        open={props.cartActive}
-        onClose={props.cartActiveHandler}
+        open={props.wishListActive}
+        onClose={props.wishListActiveHandler}
         fullWidth='true'
         maxWidth ='lg'
         classes={{ paperWidthLg: classes.dialogPaper }}
         >
             <DialogTitle>
                 <h2>
-                    Cart - {props.activeUserDetail[0].name.firstname} {props.activeUserDetail[0].name.lastname}
+                    Wish List - {props.activeUserDetail[0].name.firstname} {props.activeUserDetail[0].name.lastname}
                 </h2>
             </DialogTitle>
             <TableContainer component = {Paper}>
@@ -75,7 +75,6 @@ function Cart(props){
                             <TableCell>Product Id</TableCell>
                             <TableCell>Product Name</TableCell>
                             <TableCell>Price </TableCell>
-                            <TableCell>Quantity</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -84,25 +83,12 @@ function Cart(props){
                                 <TableCell>{e.id}</TableCell>
                                 <TableCell>{e.title}</TableCell>
                                 <TableCell>${e.price}</TableCell>
-                                {/* <TableCell>
-                                    {count.filter}
-                                </TableCell> */}
-                                
-                                {count.map(ele => {
-                                    if(ele.id === e.id){
-                                        return <TableCell>{ele.count}</TableCell>
-                                    }
-                                })}
                             </TableRow>
                         ))
-
                         }
                     </TableBody>
                 </Table>
             </TableContainer>
-            <DialogActions>
-                <h3 className={classes.totalPrice}>Total Price - ${totalPrice}</h3>                
-            </DialogActions>
         </Dialog>
     );
 
@@ -110,16 +96,17 @@ function Cart(props){
 
 const mapStateToProps = state =>{
     return{
-        cartActive : state.cartActive,
+        // cartActive : state.cartActive,
         activeUserDetail : state.activeUserDetail,
         cart : state.cart,
-        product : state.product
+        product : state.product,
+        wishListActive : state.wishListActive
     }
 }
 const mapDispatchToProps = dispatch =>{
     return{
-        cartActiveHandler : ()=>dispatch(cartActive())
+        wishListActiveHandler : () => dispatch(wishListActive())
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Cart);
+export default connect(mapStateToProps,mapDispatchToProps)(WishList);

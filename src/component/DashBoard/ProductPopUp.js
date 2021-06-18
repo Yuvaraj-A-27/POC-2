@@ -1,20 +1,22 @@
-import {  Dialog, DialogContent, DialogContentText, DialogTitle, makeStyles, Paper} from '@material-ui/core';
-import React from 'react'
+import {  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, makeStyles, Paper} from '@material-ui/core';
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
-import { addToCart, productPopUpActive } from '../../Store/Action';
+import { addToCart, addToWishList, productPopUpActive } from '../../Store/Action';
 import AppleIcon from '@material-ui/icons/Apple';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+// import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import AddIcon from '@material-ui/icons/Add';
 
-const useStyles = makeStyles(()=>({
+const useStyles = makeStyles((theme)=>({
     title:{
         marginTop:'-20px',
         height: '30px',
     },
     image:{
-        width: '200px',
-        marginTop: '-100vh',
-        marginLeft : '600px',
-        paddingBottom: '90px'
+        width: '250px',
+        marginTop: '50px',
+        marginLeft : '-30px',
+        marginBottom: '90px'
     },
     icon:{
         marginTop:'-20px'
@@ -33,7 +35,7 @@ const useStyles = makeStyles(()=>({
         marginLeft:'2%'
     },
     productTitle:{
-        marginTop:'-380px',
+        marginTop:'-270px',
         marginLeft:'2%',
         width:'43%',
 
@@ -47,8 +49,8 @@ const useStyles = makeStyles(()=>({
         background: '#0212f0',
         width: '.8%',
         marginRight: '200px',
-        marginTop: '-250px',
-        minHeight:'250px',
+        marginTop: '-390px',
+        minHeight:'280px',
         justifyItems:'left',
         display: 'flex',
         position:'static'
@@ -56,7 +58,7 @@ const useStyles = makeStyles(()=>({
     addcartIcon:{
         color: 'white',
         marginTop:'207px',
-        marginLeft:'350px',
+        marginLeft:'90px',
         transition : 'transform 0.3s',
         '&:hover':{
             transform: 'translateY(-5px)'
@@ -69,21 +71,56 @@ const useStyles = makeStyles(()=>({
         marginLeft:'10px'
     },
     price:{
-        marginLeft:'25px'
-    }
+        // marginLeft:'25px'
+        marginLeft : '2%'
+    },
+    favIcon:{
+        marginLeft : '18%',
+        marginTop : '23%',
+        // bottom: theme.spacing(-15)
+        width:  '40%'
+
+    },
+    extendedIcon1: {
+        marginRight: theme.spacing(2),
+    },
+    extendedIcon2: {
+        marginRight: theme.spacing(2),
+    },
+    AddIcon:{
+        marginLeft : '-40%',
+        marginTop : '33%',
+        width:  '40%'
+    },
 }))
 
 
 function ProductPopUp(props){
     const classes = useStyles()
-
-    //state value 
-    if(props.currentProduct!==0){
+    
+    //state value for wishlist
+    const [wishListHelper, setWishListHelper] = useState(true)
+    
     const product = props.productList.filter((e) => e.id===props.currentProduct)
     const productRender = product[0]
 
     const addToCartHandler =()=>{
         props.addToCart(props.currentProduct,props.activeUserDetail[0].id)
+    }
+
+    const addToWishListHandler =()=>{
+        // setWishListHelper(!wishListHelper)
+        const updatedWishList = props.wishList ? props.wishList.filter((e) => e.productId===props.currentProduct && e.userId===props.activeUserDetail[0].id) : []
+
+        if(updatedWishList.length===0){
+            setWishListHelper(false)
+            props.addToWishList([...props.wishList, {productId : props.currentProduct, userId : props.activeUserDetail[0].id}])
+        }
+        else{
+            setWishListHelper(true)
+            const updatedWishList2 = props.wishList.filter(e => e.productId!==props.currentProduct && e.userId!==props.activeUserDetail[0].id)
+            props.addToWishList(updatedWishList2)
+        }
     }
 
     return (
@@ -100,15 +137,22 @@ function ProductPopUp(props){
                     MyStore
                 </h1>
             </DialogTitle>
-            {/* <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper> */}
 
             <DialogContent>
                 <Paper elevation={3} className={classes.emptyDiv}>&ensp;
-                    <AddCircleOutlineIcon onClick={addToCartHandler} className={classes.addcartIcon} />
-                    <h4 className={classes.addCartText} >Add to Cart</h4>
-                </Paper>
+                    <img className={classes.image} src={productRender.image} alt={productRender.id} />
 
-                <img className={classes.image} src={productRender.image} alt={productRender.id} />
+                    <Fab variant="extended" color={wishListHelper?'default':'secondary'} onClick = {addToWishListHandler} className={classes.favIcon}>
+                        <FavoriteIcon className={classes.extendedIcon1}/>{wishListHelper?'Add to WishList':'Remove from WishList'}
+                    </Fab>
+                    <Fab variant="extended" color='default' onClick={addToCartHandler} className={classes.AddIcon}>
+                        <AddIcon className={classes.extendedIcon2}/>Add to Cart
+                    </Fab>
+                    {/* <AddCircleOutlineIcon onClick={addToCartHandler} className={classes.addcartIcon} />
+                    <h4 className={classes.addCartText} >Add to Cart</h4> */}
+                </Paper>
+                <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper>
+
                 <h4 className={classes.productTitle}>{productRender.title}</h4>
             
             <DialogContentText >
@@ -116,17 +160,15 @@ function ProductPopUp(props){
             </DialogContentText>
 
                 <h2 className={classes.price}>Price - ${productRender.price}</h2>
-                <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper>
-                
+                {/* <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper> */}
+                {/* <img className={classes.image} src={productRender.image} alt={productRender.id} /> */}
+                {/* <Fab variant="extended" color='secondary' className={classes.favIcon}>
+                    <FavoriteIcon className={classes.extendedIcon}/>Add to WishList
+                </Fab> */}
             </DialogContent>
-            {/* <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper> */}
 
         </Dialog>
     );
-    }
-    return(
-        <p>checking</p>
-    )
 }
 
 const mapStateToProps = state =>{
@@ -134,14 +176,16 @@ const mapStateToProps = state =>{
         productPopUpActive : state.productPopUpActive,
         currentProduct : state.currentProduct,
         productList : state.product,
-        activeUserDetail : state.activeUserDetail
+        activeUserDetail : state.activeUserDetail,
+        wishList : state.wishList
     }
 }
 
 const mapDispatchToProps = dispatch =>{
     return{
         productPopUpActiveHandler : ()=> dispatch(productPopUpActive()),
-        addToCart : (productId, userId) => dispatch(addToCart(productId, userId))
+        addToCart : (productId, userId) => dispatch(addToCart(productId, userId)),
+        addToWishList : (value) => dispatch(addToWishList(value))
     }
 }
 

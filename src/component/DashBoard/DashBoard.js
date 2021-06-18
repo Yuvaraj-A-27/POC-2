@@ -9,6 +9,8 @@ import Search from './Search'
 import Profile from './Profile'
 import Cart from './Cart'
 import { useHistory } from 'react-router'
+import LeftNavBar from '../util/LeftNavBar'
+import WishList from './WishList'
 
 
 const useStyles = makeStyles(()=>({
@@ -44,9 +46,11 @@ function DashBoard(){
             <ProductPopUp />
             <Profile />
             <Cart />
+            <WishList/>
             <Category dataTestid = 'Category' />
             <Product dataTestid = 'Product' />
-            <a href='#Appbar'><NavigationIcon data-testid='navIcon' className={classes.upArrow} /></a>    
+            <a href='#Appbar'><NavigationIcon data-testid='navIcon' className={classes.upArrow} /></a> 
+            <LeftNavBar />   
         </div>
     )
     }
