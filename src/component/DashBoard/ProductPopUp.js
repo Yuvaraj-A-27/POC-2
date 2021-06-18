@@ -1,5 +1,5 @@
 import {  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, makeStyles, Paper} from '@material-ui/core';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { addToCart, addToWishList, productPopUpActive } from '../../Store/Action';
 import AppleIcon from '@material-ui/icons/Apple';
@@ -100,16 +100,32 @@ function ProductPopUp(props){
     
     //state value for wishlist
     const [wishListHelper, setWishListHelper] = useState(true)
+
+    useEffect(()=>{
+        const initailWishListChecking =  props.wishList ? props.wishList.filter((e) => e.productId===props.currentProduct && e.userId===props.activeUserDetail[0].id) : []
+        if(initailWishListChecking.length===0){
+            setWishListHelper(true)
+        }
+        else{
+            setWishListHelper(false)
+        }
     
+    }, [props])
+
+
+    //product detail
     const product = props.productList.filter((e) => e.id===props.currentProduct)
     const productRender = product[0]
 
+
+    //add to cart
     const addToCartHandler =()=>{
         props.addToCart(props.currentProduct,props.activeUserDetail[0].id)
     }
 
+
+    //add to wish functionalities
     const addToWishListHandler =()=>{
-        // setWishListHelper(!wishListHelper)
         const updatedWishList = props.wishList ? props.wishList.filter((e) => e.productId===props.currentProduct && e.userId===props.activeUserDetail[0].id) : []
 
         if(updatedWishList.length===0){
@@ -118,7 +134,17 @@ function ProductPopUp(props){
         }
         else{
             setWishListHelper(true)
-            const updatedWishList2 = props.wishList.filter(e => e.productId!==props.currentProduct && e.userId!==props.activeUserDetail[0].id)
+            // const updatedWishList2 = props.wishList.filter(e => (e.productId!=props.currentProduct && e.userId!=props.activeUserDetail[0].id))
+            const updatedWishList2 = props.wishList.filter((e)=>{
+                if(e.userId===props.activeUserDetail[0].id){
+                    if(e.productId !== props.currentProduct){
+                        return e
+                    }
+                }
+                else{
+                    return e
+                }
+            })
             props.addToWishList(updatedWishList2)
         }
     }
