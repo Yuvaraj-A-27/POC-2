@@ -1,11 +1,13 @@
-import {  Dialog, DialogContent, DialogContentText, DialogTitle, makeStyles, Paper} from '@material-ui/core';
+import {  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, makeStyles, Paper} from '@material-ui/core';
 import React from 'react'
 import { connect } from 'react-redux';
 import { addToCart, productPopUpActive } from '../../Store/Action';
 import AppleIcon from '@material-ui/icons/Apple';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+// import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import AddIcon from '@material-ui/icons/Add';
 
-const useStyles = makeStyles(()=>({
+const useStyles = makeStyles((theme)=>({
     title:{
         marginTop:'-20px',
         height: '30px',
@@ -69,8 +71,27 @@ const useStyles = makeStyles(()=>({
         marginLeft:'10px'
     },
     price:{
-        marginLeft:'25px'
-    }
+        // marginLeft:'25px'
+        marginLeft : '2%'
+    },
+    favIcon:{
+        marginLeft : '18%',
+        marginTop : '23%',
+        // bottom: theme.spacing(-15)
+        width:  '40%'
+
+    },
+    extendedIcon1: {
+        marginRight: theme.spacing(2),
+    },
+    extendedIcon2: {
+        marginRight: theme.spacing(2),
+    },
+    AddIcon:{
+        marginLeft : '-40%',
+        marginTop : '33%',
+        width:  '40%'
+    },
 }))
 
 
@@ -105,8 +126,14 @@ function ProductPopUp(props){
                 <Paper elevation={3} className={classes.emptyDiv}>&ensp;
                     <img className={classes.image} src={productRender.image} alt={productRender.id} />
 
-                    <AddCircleOutlineIcon onClick={addToCartHandler} className={classes.addcartIcon} />
-                    <h4 className={classes.addCartText} >Add to Cart</h4>
+                    <Fab variant="extended" color='secondary' className={classes.favIcon}>
+                        <FavoriteIcon className={classes.extendedIcon1}/>Add to WishList
+                    </Fab>
+                    <Fab variant="extended" color='default' onClick={addToCartHandler} className={classes.AddIcon}>
+                        <AddIcon className={classes.extendedIcon2}/>Add to Cart
+                    </Fab>
+                    {/* <AddCircleOutlineIcon onClick={addToCartHandler} className={classes.addcartIcon} />
+                    <h4 className={classes.addCartText} >Add to Cart</h4> */}
                 </Paper>
                 <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper>
 
@@ -119,7 +146,9 @@ function ProductPopUp(props){
                 <h2 className={classes.price}>Price - ${productRender.price}</h2>
                 {/* <Paper elevation={3} className={classes.emptyDiv2}>&ensp;</Paper> */}
                 {/* <img className={classes.image} src={productRender.image} alt={productRender.id} /> */}
-                
+                {/* <Fab variant="extended" color='secondary' className={classes.favIcon}>
+                    <FavoriteIcon className={classes.extendedIcon}/>Add to WishList
+                </Fab> */}
             </DialogContent>
 
         </Dialog>

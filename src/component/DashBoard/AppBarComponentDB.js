@@ -20,19 +20,14 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+    display: 'block',
   },
   sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
+    display: 'flex',
   },
   menu:{
-    marginTop:'-440px',
+    marginTop:'-61%',
+    display: 'flex',
   }
 }));
 
@@ -62,6 +57,7 @@ function AppBarComponentDB(props) {
     >
       <MenuItem onClick={props.profileActiveHandler}>Profile</MenuItem>
       <MenuItem onClick={props.cartActiveHandler}>Cart</MenuItem>
+      <MenuItem onClick=''>Wish List</MenuItem>
       <MenuItem onClick = {logoutHandler}>Logout</MenuItem>
     </Menu>
   );
@@ -94,8 +90,10 @@ function AppBarComponentDB(props) {
                     >
                             <AccountCircle />
                     </IconButton>
+                    
           </div>
         </Toolbar>
+
       </AppBar>
       {renderMenu}
     </div>

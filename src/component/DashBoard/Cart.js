@@ -51,7 +51,6 @@ function Cart(props){
             }
         }
     }
-    // console.log(totalPrice);
 
     
 
