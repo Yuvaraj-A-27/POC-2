@@ -421,6 +421,8 @@ function Register(props){
                             color="primary" 
                             className={classes.margin}
                             onClick = {onSubmitHandler}
+                            disabled = {firstNameError || lastNameError || emailError || userNameError || passwordError ||
+                            doorNoError || cityError || zipCodeError || phoneNoError || streetError }
                         >Register
                         </Button>
                     </DialogActions>

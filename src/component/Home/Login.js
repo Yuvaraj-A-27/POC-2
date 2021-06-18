@@ -2,7 +2,7 @@ import { CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, ma
 import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
-import { activeUser, loginActive, loginError, loginErrorTyping } from '../../Store/Action';
+import { activeUser, loginActive } from '../../Store/Action';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 
@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme)=>({
     },
     content:{
         margin: theme.spacing(3),
-        marginTop:'-30px',
-        height: '180px',
+        marginTop:'-35px',
+        height: '190px',
     },
     dialogPaper:{
         maxWidth: '400px',
@@ -26,8 +26,7 @@ const useStyles = makeStyles((theme)=>({
         minHeight: '370px',
     },
     loader:{
-        marginLeft:'40%',
-        marginTop:'5%',
+        marginRight : '23%'
     }
 }))
 
@@ -43,7 +42,8 @@ function Login(props){
     const[loading, setLoading] = useState(false)
     const[userNameError, setUserNameError] = useState(false)
     const[passwordError, setPasswordError] = useState(false)
-    const[loginError,setLoginError] = useState(false)
+    const[userNameTest, setUserNameTest] = useState(false)
+    const[passwordTest, setPasswordTest] = useState(false)
 
 
     const loginHandler = (e)=>{
@@ -60,60 +60,54 @@ function Login(props){
                     localStorage.setItem('token',res.data.token)
                     let activeUser = props.userDetail.filter(e => e.username===userName)
                     if(activeUser[0].password !== password){
+                        setPasswordTest(true)
                         setPasswordError(true)
-                        // props.loginErrorHandler()
-                        setLoginError(true)
                     }
                     else{
                         props.activeUser(activeUser)
                         props.loginActiveAction()
                         history.push('/dashboard')
-                        // props.loginErrorTypingHandler()
-                        setLoginError(false)
                     }
-                    console.log(activeUser);
                 }
                 else{
-                    // props.loginErrorHandler()
-                    setLoginError(true)
+                    setUserNameTest(true)
                     setUserNameError(true)
                 }
             })
             .catch((err)=>console.log(err))
         }
         else{
-            // props.loginErrorHandler()
-            setLoginError(true)
+            if(!password){
+                setPasswordError(true)
+            }
+            if(!userName){
+                setUserNameError(true)
+            }
         }
         
     }
 
-    const err = loginError? 'error' : null
-    // const err = props.loginError? 'error' : null
-    const usernameErrorText = userNameError ? 'User not available. Please make yourself Registered' : ''
-    const passwordErrorText = passwordError ? 'Incorrect password' : ''
+    const usernameErrorText = userNameTest ? 'User not available. Please make yourself Registered' : ''
+    const passwordErrorText = passwordTest ? 'Incorrect password' : ''
     
     const userNameHandler =(e)=>{
         setUserName(e.target.value)
-        // props.loginErrorTypingHandler()
-        setLoginError(false)
-        setPasswordError(false)
         setUserNameError(false)
+        setUserNameTest(false)
     }
     
     const passwordHandler = (e)=>{
         setPassword(e.target.value)
-        setLoginError(false)
-        // props.loginErrorTypingHandler()
         setPasswordError(false)
-        setUserNameError(false)
+        setPasswordTest(false)
 
     }
 
     const closeLoginHandler = () =>{
-        setLoginError(false)
         setPasswordError(false)
         setUserNameError(false)
+        setPasswordTest(false)
+        setUserNameTest(false)
         props.loginActiveAction()
         setUserName('')
         setPassword('')
@@ -126,7 +120,7 @@ function Login(props){
                 <form>
                     <DialogContent className={classes.content}>
                         <TextField
-                            error={err}
+                            error={userNameError}
                             label="User Name"
                             style={{ marginBottom: '20px' }}
                             placeholder = 'User Name'
@@ -139,7 +133,7 @@ function Login(props){
                             helperText = {usernameErrorText}
                         />
                         <TextField
-                            error={err}
+                            error={passwordError}
                             label="Password"
                             style={{ marginTop: 5 }}
                             placeholder = 'password'
@@ -152,11 +146,14 @@ function Login(props){
                             onChange = {passwordHandler}
                             helperText = {passwordErrorText}
                         />
+                        {/* {loading &&
+                            <CircularProgress className={classes.loader} color='secondary' />
+                        } */}
+                    </DialogContent>
+                    <DialogActions>
                         {loading &&
                             <CircularProgress className={classes.loader} color='secondary' />
                         }
-                    </DialogContent>
-                    <DialogActions>
                         <Button 
                             variant="contained" 
                             size="medium" 
@@ -164,7 +161,7 @@ function Login(props){
                             className={classes.btn}
                             onClick = {loginHandler}
                             placeholder = 'login-btn'
-                            disabled = {loginError || loading}
+                            disabled = { loading || userNameError || passwordError}
                         >Login
                         </Button>
                     </DialogActions>
