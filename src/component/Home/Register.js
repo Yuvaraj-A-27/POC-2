@@ -1,4 +1,4 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle, makeStyles, TextField } from '@material-ui/core'
+import { Dialog, DialogActions, DialogContent, DialogTitle, makeStyles, TextField, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme)=>({
         maxHeight: '600px',
         minHeight: '600px',
     },
+    success:{
+        color : '#0b9e06'
+    }
 }))
 
 function Register(props){
@@ -56,7 +59,7 @@ function Register(props){
     const [cityError,setCityError] = useState(false)
     const [zipCodeError,setZipCodeError] = useState(false)
     const [phoneNoError,setPhoneNoError] = useState(false)
-    const [allSetToRegister, setAllSetToRegister] = useState(false)
+    const [success, setSuccess] = useState(false)
 
     //state for --->  validation stage 2
     const [emailErrorTest, setEmailErrorTest] = useState(false)
@@ -69,93 +72,123 @@ function Register(props){
     //Error Helper text
     const emailhelper = emailErrorTest? 'Invalid Email' : ''
     const userNameHelper = userNameTest? (register.username+' is taken') : ''
-    const passwordHelper = passwordTest ? 'Password should contain atleast 1 UpperCase letter, 1 LowerCase letter, 1 number and 1 Special Character' : ''
+    const passwordHelper = passwordTest ? 'Password should contain 8 to 15 characters, atleast 1 UpperCase letter, 1 LowerCase letter, 1 number and 1 Special Character' : ''
     const zipcodeHelper = zipcodeTest? 'Use only number' : ''
     const phoneNoHelper = phoneNoTest? 'Use only number' : ''
 
 
     const validation = () =>{
+        let firstNameErr = false, lastNameErr = false, doorNoErr = false, streetErr= false, cityErr= false, emailErr= false
+        let passwordErr = false, userNameErr = false, zipcodeErr = false, phoneNoErr = false
+        if(!register.firstname) {
+            setFirstNameError(true)
+            firstNameErr = true
+        }
+        if(!register.lastname) {
+            setlastNameError(true)
+            lastNameErr = true
+        }
+        if(!register.number) {
+            setDoorNoError(true)
+            doorNoErr = true
+        }
+        if(!register.street) {
+            setStreetError(true)
+            streetErr = true
+        }
+        if(!register.city) {
+            setCityError(true)
+            cityErr = true
+        }
 
-        if(!register.firstname) {setFirstNameError(true)}
-        if(!register.lastname) {setlastNameError(true)}
-        if(!register.number) {setDoorNoError(true)}
-        if(!register.street) {setStreetError(true)}
-        if(!register.city) {setCityError(true)}
 
         //email
         if(!register.email) {
             setEmailError(true)
+            emailErr = true
         }
         else{
             if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(register.email)){
                 setEmailErrorTest(true)
                 setEmailError(true)
+                emailErr = true
             }
         }
+
 
         //user name
         if(!register.username) {
             setUserNameError(true)
+            userNameErr = true
         }
         else{
             let userNameChecking = props.userDetail.filter(e => e.username === register.username)
             if(userNameChecking[0]){
                 setUserNameTest(true)
                 setUserNameError(true)
-            }
-            else{
-                setUserNameTest(false)
-                setUserNameError(false)
+                userNameErr = true
             }
         }
+        
+
 
         //password
         if(!register.password) {
             setPasswordError(true)
+            passwordErr = true
         }
         else{
             if(!register.password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/)){
                 setPasswordError(true)
                 setPasswordTest(true)
+                passwordErr = true
             }
         }
+
+
 
         //zipcode
         if(!register.zipcode) {
             setZipCodeError(true)
+            zipcodeErr = true
         }
         else{
             if(!register.zipcode.match(/^[0-9]+$/)){
                 setZipCodeError(true)
                 setZipcodeTest(true)
+                zipcodeErr = true
             }
         }
+
 
         //Phone number
         if(!register.phone) {
             setPhoneNoError(true)
+            phoneNoErr = true
         }
         else{
-            if(!register.zipcode.match(/^[0-9]+$/)){
+            if(!register.phone.match(/^[0-9]+$/)){
                 setPhoneNoTest(true)
                 setPhoneNoError(true)
+                phoneNoErr = true
             }
         }
 
 
-
-        //All Set to register validation
-        if( (register.firstname && register.lastname && register.username && register.email && register.password && register.number && register.city && register.street && register.zipcode && register.phone) && (!(firstNameError || lastNameError || emailError || emailErrorTest || userNameTest || userNameError || passwordError || passwordTest || doorNoError || streetError || cityError || zipCodeError || phoneNoError))){
-            setAllSetToRegister(true)
-            setRegister(initialState)
+        // All Set to register validation
+        if( (register.firstname && register.lastname && register.username && register.email && register.password && register.number && register.city && register.street && register.zipcode && register.phone) && (!(firstNameErr || lastNameErr || emailErr || userNameErr || passwordErr || doorNoErr || streetErr || cityErr || zipcodeErr || phoneNoErr))){
+            return true
         }
+        
+        return false
     }
 
     const onSubmitHandler = async() =>{
 
-        await validation()
-        
-        if(allSetToRegister){
+        const result = await validation()
+
+        if(result){
+
             let detail ={
                 id: props.userDetail.length + 1,
                 email : register.email,
@@ -178,7 +211,11 @@ function Register(props){
                 phone :register.phone
             }
             props.createUserHandler(detail)
-            setAllSetToRegister(false)
+            setRegister(initialState)
+            setSuccess(true)
+            setTimeout(() => {
+                setSuccess(false)
+            }, 5000);
         }
     }
     
@@ -201,9 +238,8 @@ function Register(props){
         setPasswordTest(false)
         setZipcodeTest(false)
         setPhoneNoTest(false)
-        setAllSetToRegister(false)
     }
-    console.log(allSetToRegister);
+    // console.log('all set',allSetToRegister);
     
     return(
     <div data-tesid={props.dataTestid}>
@@ -213,6 +249,7 @@ function Register(props){
                     <DialogContent className={classes.content}>
                         <TextField
                             placeholder="First name"
+                            label = 'First Name'
                             style={{ marginBottom: '10px' }}
                             fullWidth
                             error = {firstNameError}
@@ -227,6 +264,7 @@ function Register(props){
                         />
                         <TextField
                             placeholder="Last Name"
+                            label = 'Last Name'
                             style={{ marginBottom: '10px' }}
                             fullWidth
                             error = {lastNameError}
@@ -241,6 +279,7 @@ function Register(props){
                         />
                         <TextField
                             placeholder="Email"
+                            label = 'Email'
                             style={{ marginBottom: '10px' }}
                             fullWidth
                             error = {emailError}
@@ -258,6 +297,7 @@ function Register(props){
                         />
                         <TextField
                             placeholder="User Name"
+                            label = 'User Name'
                             style={{ marginBottom: '10px' }}
                             fullWidth
                             error = {userNameError}
@@ -274,6 +314,7 @@ function Register(props){
                         />
                         <TextField
                             placeholder="Password"
+                            label = 'Password'
                             style={{ marginTop: 2 }}
                             fullWidth
                             error = {passwordError}
@@ -291,6 +332,7 @@ function Register(props){
                         />
                         <TextField
                             placeholder="Door Number"
+                            label = 'Door Number'
                             style={{ marginBottom: '10px' }}
                             fullWidth
                             error = {doorNoError}
@@ -306,6 +348,7 @@ function Register(props){
                         />
                         <TextField
                             placeholder="Street"
+                            label = 'Street'
                             style={{ marginBottom: '10px' }}
                             fullWidth
                             error = {streetError}
@@ -320,6 +363,7 @@ function Register(props){
                         />
                         <TextField
                             placeholder="City"
+                            label = 'City'
                             style={{ marginBottom: '10px' }}
                             fullWidth
                             error = {cityError}
@@ -334,6 +378,7 @@ function Register(props){
                         />
                         <TextField
                            placeholder="Zip Code"
+                           label = 'Zip Code'
                             style={{ marginBottom: '10px' }}
                             fullWidth
                             error = {zipCodeError}
@@ -350,6 +395,7 @@ function Register(props){
                         />
                         <TextField
                             placeholder="Phone Number"
+                            label = 'Phone Number'
                             style={{ marginBottom: '10px' }}
                             fullWidth
                             error = {phoneNoError}
@@ -364,7 +410,9 @@ function Register(props){
                             }}
                             helperText = {phoneNoHelper}
                         />
-                        
+                        {success &&
+                            <Typography align='center' className = {classes.success}>You are Successfully Registered</Typography>
+                        }
                     </DialogContent>
                     <DialogActions>
                         <Button 
