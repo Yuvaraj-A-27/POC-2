@@ -50,9 +50,9 @@ const Reducer = (state = initialState, action)=>{
             productPopUpActive : !state.productPopUpActive,
             loginActive : false,
             profileActive:false,
-            cartActive : false,
+            // cartActive : false,
             registerActive : false,
-            wishListActive: false,
+            // wishListActive: false,
         }
 
         case ACTIVE_USER: return{
