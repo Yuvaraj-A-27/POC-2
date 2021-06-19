@@ -84,7 +84,7 @@ function WishList(props){
                         {productDetail.map((e)=>(
                             <TableRow key= {e.id}>
                                 <TableCell align='center' >{e.id}</TableCell>
-                                <TableCell align='center' onClick={productPopUpHandler}>{e.title}</TableCell>
+                                <TableCell align='center' className = {classes.deleteIcon} onClick={productPopUpHandler}>{e.title}</TableCell>
                                 <TableCell align='center'>${e.price}</TableCell>
                                 <TableCell align='center'><AddIcon className={classes.deleteIcon} onClick={()=>addHandler(e.id)}/></TableCell>
                                 <TableCell align='center'><DeleteIcon className = {classes.deleteIcon} onClick={()=>deleteHandler(e.id)} /></TableCell>
