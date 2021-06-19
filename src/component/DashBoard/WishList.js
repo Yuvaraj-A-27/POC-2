@@ -1,7 +1,10 @@
-import { Dialog, DialogActions, DialogTitle, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
-import React from 'react'
+import { Dialog, DialogTitle, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
-import { wishListActive } from '../../Store/Action';
+import { addToCart, addToWishList, productPopUpActive, wishListActive } from '../../Store/Action';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles(()=>({
     dialogPaper:{
@@ -12,48 +15,46 @@ const useStyles = makeStyles(()=>({
     totalPrice:{
         textAlign : 'right',
         marginRight : '180px'
-    }
+    },
+    deleteIcon:{
+        transition : 'transform 0.5s',
+        '&:hover':{
+            transform: 'translateY(-3px)'
+        }
+    },
+    
 }))
 
 function WishList(props){
     const classes = useStyles()
 
-    const cartOfCurrentUser = props.cart.filter(e=> e.userId===props.activeUserDetail[0].id)
+    //state
+    const [addToCartAlert, setAddToCartAlert] = useState(false)
 
-    //contains duplicate
-    const productIds = cartOfCurrentUser.map(e=> e.productId)
-    //unique ids
-    const productId = [...new Set(productIds)]
+    const wishListOfCurrentUser = props.wishList.filter(e=> e.userId===props.activeUserDetail[0].id)
+
+    //product Ids of current user
+    const productIds = wishListOfCurrentUser.map(e=> e.productId)
     
     //product details of carted product
-    const productDetail = props.product.filter(e => productId.includes(e.id))
-    console.log(productDetail[3]);
+    const productDetail = props.product.filter(e => productIds.includes(e.id))
     
-    // count of each product
-    const count = []
-    for(let i = 0; i<productId.length; i++){
-        let c = 0
-        for(let j=0; j<productIds.length; j++){
-            if(productId[i]===productIds[j]){
-                c++
-            }
-        }
-        count.push({id: productId[i], count:c})
-    }
-    
-
-    //total price
-    var totalPrice = 0
-    for(let i in count){
-        for(let j in productDetail){
-            if(count[i].id === productDetail[j].id){
-                totalPrice = totalPrice + (count[i].count * productDetail[j].price)
-            }
-        }
+    const deleteHandler = (productId) =>{
+        const alteredWishList = props.wishList.filter((e) => e.productId!==productId)
+        props.addToWishList(alteredWishList)
     }
 
-    
+    const addHandler = (productId) =>{
+        props.addToCart(productId, props.activeUserDetail[0].id)
+        setAddToCartAlert(true)
+        setTimeout(() => {
+            setAddToCartAlert(false)
+        }, 1000);
+    }
 
+    const productPopUpHandler = () =>{
+        props.productPopUpActive()
+    }
 
     return(
         <Dialog
@@ -69,26 +70,35 @@ function WishList(props){
                 </h2>
             </DialogTitle>
             <TableContainer component = {Paper}>
-                <Table className={classes.table}>
+                <Table className={classes.table} stickyHeader>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Product Id</TableCell>
-                            <TableCell>Product Name</TableCell>
-                            <TableCell>Price </TableCell>
+                            <TableCell align='center'><strong>Product Id</strong></TableCell>
+                            <TableCell align='center'><strong>Product Name</strong></TableCell>
+                            <TableCell align='center'><strong>Price</strong> </TableCell>
+                            <TableCell align='center'><strong>Add to Cart</strong> </TableCell>
+                            <TableCell align='center'><strong>Delete from WishList</strong></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {productDetail.map((e)=>(
                             <TableRow key= {e.id}>
-                                <TableCell>{e.id}</TableCell>
-                                <TableCell>{e.title}</TableCell>
-                                <TableCell>${e.price}</TableCell>
+                                <TableCell align='center' >{e.id}</TableCell>
+                                <TableCell align='center' className = {classes.deleteIcon} onClick={productPopUpHandler}>{e.title}</TableCell>
+                                <TableCell align='center'>${e.price}</TableCell>
+                                <TableCell align='center'><AddIcon className={classes.deleteIcon} onClick={()=>addHandler(e.id)}/></TableCell>
+                                <TableCell align='center'><DeleteIcon className = {classes.deleteIcon} onClick={()=>deleteHandler(e.id)} /></TableCell>
                             </TableRow>
                         ))
                         }
                     </TableBody>
                 </Table>
             </TableContainer>
+            {addToCartAlert &&
+                <span textAlign='center'>
+                <Alert className = {classes.alert} severity = 'success'>Successfully Added to Cart</Alert>
+                </span>
+            }
         </Dialog>
     );
 
@@ -98,14 +108,17 @@ const mapStateToProps = state =>{
     return{
         // cartActive : state.cartActive,
         activeUserDetail : state.activeUserDetail,
-        cart : state.cart,
         product : state.product,
-        wishListActive : state.wishListActive
+        wishListActive : state.wishListActive,
+        wishList : state.wishList
     }
 }
 const mapDispatchToProps = dispatch =>{
     return{
-        wishListActiveHandler : () => dispatch(wishListActive())
+        wishListActiveHandler : () => dispatch(wishListActive()),
+        addToWishList : (value) => dispatch(addToWishList(value)),
+        addToCart : (productId, userId) => dispatch(addToCart(productId,userId)),
+        productPopUpActive : () => dispatch(productPopUpActive())
     }
 }
 

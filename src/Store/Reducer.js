@@ -1,4 +1,4 @@
-import { ACTIVE_USER, ADD_TO_CART, ADD_TO_WISHLIST, CART_ACTIVE, CREATE_USER, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LEFT_NAVBAR_ACTIVE, LOGIN_ACTIVE, PRODUCT_POP_ACTIVE, PROFILE_ACTIVE, REGISTER_ACTIVE, WISHLIST_ACTIVE } from "./ActionType";
+import { ACTIVE_USER, ADD_TO_CART, ADD_TO_WISHLIST, CART_ACTIVE, CREATE_USER, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LEFT_NAVBAR_ACTIVE, LOGIN_ACTIVE, PRODUCT_POP_ACTIVE, PROFILE_ACTIVE, REGISTER_ACTIVE, REMOVE_FROM_CART, WISHLIST_ACTIVE } from "./ActionType";
 
 const initialState ={
     category : [],
@@ -50,9 +50,9 @@ const Reducer = (state = initialState, action)=>{
             productPopUpActive : !state.productPopUpActive,
             loginActive : false,
             profileActive:false,
-            cartActive : false,
+            // cartActive : false,
             registerActive : false,
-            wishListActive: false,
+            // wishListActive: false,
         }
 
         case ACTIVE_USER: return{
@@ -68,6 +68,11 @@ const Reducer = (state = initialState, action)=>{
         case ADD_TO_CART : return{
             ...state,
             cart : [...state.cart, action.payload]
+        }
+
+        case REMOVE_FROM_CART : return{
+            ...state,
+            cart : action.payload
         }
 
         case PROFILE_ACTIVE: return{

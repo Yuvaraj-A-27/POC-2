@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import React from 'react'
-import Category from '../util/Category'
+// import Category from '../util/Category'
 import Product from '../util/Product'
 import AppBarComponentDB from './AppBarComponentDB'
 import NavigationIcon from '@material-ui/icons/Navigation';
@@ -47,7 +47,7 @@ function DashBoard(){
             <Profile />
             <Cart />
             <WishList/>
-            <Category dataTestid = 'Category' />
+            {/* <Category dataTestid = 'Category' /> */}
             <Product dataTestid = 'Product' />
             <a href='#Appbar'><NavigationIcon data-testid='navIcon' className={classes.upArrow} /></a> 
             <LeftNavBar />   

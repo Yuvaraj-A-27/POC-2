@@ -1,7 +1,9 @@
 import { Dialog, DialogActions, DialogTitle, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import React from 'react'
 import { connect } from 'react-redux';
-import { cartActive } from '../../Store/Action';
+import { addToCart, cartActive, removeFromCart } from '../../Store/Action';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 const useStyles = makeStyles(()=>({
     dialogPaper:{
@@ -12,6 +14,15 @@ const useStyles = makeStyles(()=>({
     totalPrice:{
         textAlign : 'right',
         marginRight : '180px'
+    },
+    icon:{
+        paddingLeft : '5%',
+        paddingRight : '5%',
+        transform: 'translateY(3px)',
+        transition : 'transform 0.5s',
+        '&:hover':{
+            transform: 'translateY(0px)'
+        }
     }
 }))
 
@@ -27,7 +38,6 @@ function Cart(props){
     
     //product details of carted product
     const productDetail = props.product.filter(e => productId.includes(e.id))
-    console.log(productDetail[3]);
     
     // count of each product
     const count = []
@@ -51,7 +61,27 @@ function Cart(props){
             }
         }
     }
+    
+    const increment = (productId) =>{
+        props.addToCart(productId, props.activeUserDetail[0].id)
+    }
 
+    const decrement = (productId) =>{
+        let alteredCartList = []
+        let flag = true
+        let cart = props.cart
+        for (let i in props.cart){
+            if(cart[i].productId===productId && cart[i].userId===props.activeUserDetail[0].id){
+                if(flag){
+                    flag = false
+                    continue
+                }
+            }
+            // console.log(props.cart[i]);
+            alteredCartList.push(cart[i])
+        }
+        props.removeFromCart(alteredCartList)
+    }
     
 
 
@@ -69,28 +99,32 @@ function Cart(props){
                 </h2>
             </DialogTitle>
             <TableContainer component = {Paper}>
-                <Table className={classes.table}>
+                <Table className={classes.table} stickyHeader>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Product Id</TableCell>
-                            <TableCell>Product Name</TableCell>
-                            <TableCell>Price </TableCell>
-                            <TableCell>Quantity</TableCell>
+                            <TableCell align='center'><strong>Product Id</strong></TableCell>
+                            <TableCell align='center'><strong>Product Name</strong></TableCell>
+                            <TableCell align='center'><strong>Price</strong> </TableCell>
+                            <TableCell align='center'><strong>Quantity</strong></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {productDetail.map((e)=>(
                             <TableRow key= {e.id}>
-                                <TableCell>{e.id}</TableCell>
-                                <TableCell>{e.title}</TableCell>
-                                <TableCell>${e.price}</TableCell>
+                                <TableCell align='center'>{e.id}</TableCell>
+                                <TableCell align='center'>{e.title}</TableCell>
+                                <TableCell align='center'>${e.price}</TableCell>
                                 {/* <TableCell>
                                     {count.filter}
                                 </TableCell> */}
                                 
                                 {count.map(ele => {
                                     if(ele.id === e.id){
-                                        return <TableCell>{ele.count}</TableCell>
+                                        return <TableCell align='center'>
+                                                <AddIcon fontSize='small' className={classes.icon} onClick={() => increment(e.id)}/>
+                                                    <strong>{ele.count}</strong>
+                                                <RemoveIcon fontSize='small' className={classes.icon} onClick={() => decrement(e.id)}/>
+                                            </TableCell>
                                     }
                                 })}
                             </TableRow>
@@ -101,7 +135,7 @@ function Cart(props){
                 </Table>
             </TableContainer>
             <DialogActions>
-                <h3 className={classes.totalPrice}>Total Price - ${totalPrice}</h3>                
+                <h3 className={classes.totalPrice}>Total Price - ${Math.round(totalPrice)}</h3>                
             </DialogActions>
         </Dialog>
     );
@@ -118,7 +152,9 @@ const mapStateToProps = state =>{
 }
 const mapDispatchToProps = dispatch =>{
     return{
-        cartActiveHandler : ()=>dispatch(cartActive())
+        cartActiveHandler : ()=>dispatch(cartActive()),
+        addToCart : (productId, userId) => dispatch(addToCart(productId, userId)),
+        removeFromCart : (value) => dispatch(removeFromCart(value))
     }
 }
 

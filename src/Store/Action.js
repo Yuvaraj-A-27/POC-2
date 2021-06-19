@@ -1,4 +1,4 @@
-import { ACTIVE_USER, ADD_TO_CART, ADD_TO_WISHLIST, CART_ACTIVE, CREATE_USER, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LEFT_NAVBAR_ACTIVE, LOGIN_ACTIVE, PRODUCT_POP_ACTIVE, PROFILE_ACTIVE, REGISTER_ACTIVE, WISHLIST_ACTIVE } from "./ActionType"
+import { ACTIVE_USER, ADD_TO_CART, ADD_TO_WISHLIST, CART_ACTIVE, CREATE_USER, CURRENT_PRODUCT, INITIAL_CATEGORY, INITIAL_PRODUCT, INITIAL_USER_DETAIL, LEFT_NAVBAR_ACTIVE, LOGIN_ACTIVE, PRODUCT_POP_ACTIVE, PROFILE_ACTIVE, REGISTER_ACTIVE, REMOVE_FROM_CART, WISHLIST_ACTIVE } from "./ActionType"
 
 export const initialCategory = (value) =>{
     return{
@@ -55,6 +55,13 @@ export const addToCart = (productId, userId) =>{
             productId,
             userId
         }
+    }
+}
+
+export const removeFromCart = (value) =>{
+    return{
+        type : REMOVE_FROM_CART,
+        payload : value
     }
 }
 
