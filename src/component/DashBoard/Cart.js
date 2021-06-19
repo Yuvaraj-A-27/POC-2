@@ -1,4 +1,4 @@
-import { Dialog, DialogTitle, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { Dialog, DialogActions, DialogTitle, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import React from 'react'
 import { connect } from 'react-redux';
 import { cartActive } from '../../Store/Action';
@@ -11,7 +11,7 @@ const useStyles = makeStyles(()=>({
     },
     totalPrice:{
         textAlign : 'right',
-        marginRight : '200px'
+        marginRight : '180px'
     }
 }))
 
@@ -51,7 +51,6 @@ function Cart(props){
             }
         }
     }
-    // console.log(totalPrice);
 
     
 
@@ -101,7 +100,9 @@ function Cart(props){
                     </TableBody>
                 </Table>
             </TableContainer>
-            <h4 className={classes.totalPrice}>Total Price - ${totalPrice}</h4>
+            <DialogActions>
+                <h3 className={classes.totalPrice}>Total Price - ${totalPrice}</h3>                
+            </DialogActions>
         </Dialog>
     );
 

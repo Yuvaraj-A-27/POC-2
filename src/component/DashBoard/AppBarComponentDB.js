@@ -10,7 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
-import { activeUser, cartActive, profileActive } from '../../Store/Action';
+import { activeUser, cartActive, leftNavBarActive, profileActive, wishListActive } from '../../Store/Action';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -20,19 +20,16 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+    display: 'block',
   },
   sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
+    display: 'flex',
   },
   menu:{
-    marginTop:'-440px',
+    marginTop:'-61%',
+    [theme.breakpoints.up('md')]: {
+      marginTop:'-29%',
+    },
   }
 }));
 
@@ -62,13 +59,14 @@ function AppBarComponentDB(props) {
     >
       <MenuItem onClick={props.profileActiveHandler}>Profile</MenuItem>
       <MenuItem onClick={props.cartActiveHandler}>Cart</MenuItem>
+      <MenuItem onClick={props.wishListActiveHandler}>Wish List</MenuItem>
       <MenuItem onClick = {logoutHandler}>Logout</MenuItem>
     </Menu>
   );
 
 
   return (
-    <div className={classes.grow} id = {props.id}>
+    <div className={classes.grow} data-testid={props.dataTestid} id = {props.id}>
       <AppBar position="static">
         <Toolbar>
             <IconButton
@@ -77,7 +75,7 @@ function AppBarComponentDB(props) {
                 color="inherit"
                 aria-label="open drawer"
             >
-                    <MenuIcon />
+                    <MenuIcon onClick={props.leftNavBarHandler}/>
             </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             DashBoard - {props.activeUser[0].name.firstname} {props.activeUser[0].name.lastname}
@@ -94,8 +92,10 @@ function AppBarComponentDB(props) {
                     >
                             <AccountCircle />
                     </IconButton>
+                    
           </div>
         </Toolbar>
+
       </AppBar>
       {renderMenu}
     </div>
@@ -113,7 +113,9 @@ const mapDispatchToProps = dispatch =>{
   return{
     activeUserHandler : (value)=>dispatch(activeUser(value)),
     profileActiveHandler : ()=> dispatch(profileActive()),
-    cartActiveHandler : () => dispatch(cartActive())
+    cartActiveHandler : () => dispatch(cartActive()),
+    leftNavBarHandler : () =>dispatch(leftNavBarActive()),
+    wishListActiveHandler : () => dispatch(wishListActive())
   }
 }
 

@@ -29,7 +29,7 @@ function ProductCard({product_id,image, title, loginActive, activeUser,productPo
     }
 
     return(
-            <Card className ={classes.card} onClick={activeUser.length!==0?productPopUpHandler:loginActive}>
+            <Card data-testid = 'productCard' className ={classes.card} onClick={activeUser.length!==0?productPopUpHandler:loginActive}>
                  <CardActionArea>
                      <CardMedia 
                          className={classes.cardMedia}
