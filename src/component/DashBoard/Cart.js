@@ -27,7 +27,6 @@ function Cart(props){
     
     //product details of carted product
     const productDetail = props.product.filter(e => productId.includes(e.id))
-    console.log(productDetail[3]);
     
     // count of each product
     const count = []

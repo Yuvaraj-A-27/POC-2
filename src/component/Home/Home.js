@@ -3,13 +3,14 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import { initialCategory, initialProduct, initialUserDetail} from "../../Store/Action";
 import AppBarComponent from "./AppBarComponent";
-import Category from "../util/Category";
+// import Category from "../util/Category";
 import Product from "../util/Product";
 import NavigationIcon from '@material-ui/icons/Navigation';
 import { makeStyles } from "@material-ui/core";
 import Login from "./Login";
 import Register from "./Register";
 import LeftNavBar from "../util/LeftNavBar";
+import Search from '../DashBoard/Search'
 
 
 const useStyles = makeStyles(()=>({
@@ -66,7 +67,8 @@ function Home(props){
     return(
         <div>
             <AppBarComponent dataTestid='AppBar' id='Appbar' />
-            <Category dataTestid = 'Category' />
+            {/* <Category dataTestid = 'Category' /> */}
+            <Search />
             <Product dataTestid = 'Product' />
             <a href='#Appbar'><NavigationIcon data-testid='navIcon' className={classes.upArrow} /></a>    
             <Login dataTestid='Login' />
