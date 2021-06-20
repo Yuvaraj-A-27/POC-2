@@ -1,7 +1,7 @@
 import { Dialog, DialogTitle, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
-import { addToCart, addToWishList, productPopUpActive, wishListActive } from '../../Store/Action';
+import { addToCart, addToWishList, currentProduct, productPopUpActive, wishListActive } from '../../Store/Action';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 import Alert from '@material-ui/lab/Alert';
@@ -52,8 +52,9 @@ function WishList(props){
         }, 1000);
     }
 
-    const productPopUpHandler = () =>{
+    const productPopUpHandler = (productId) =>{
         props.productPopUpActive()
+        props.currentProductHandler(productId)
     }
 
     return(
@@ -84,7 +85,7 @@ function WishList(props){
                         {productDetail.map((e)=>(
                             <TableRow key= {e.id}>
                                 <TableCell align='center' >{e.id}</TableCell>
-                                <TableCell align='center' className = {classes.deleteIcon} onClick={productPopUpHandler}>{e.title}</TableCell>
+                                <TableCell align='center' className = {classes.deleteIcon} onClick={()=>productPopUpHandler(e.id)}>{e.title}</TableCell>
                                 <TableCell align='center'>${e.price}</TableCell>
                                 <TableCell align='center'><AddIcon className={classes.deleteIcon} onClick={()=>addHandler(e.id)}/></TableCell>
                                 <TableCell align='center'><DeleteIcon className = {classes.deleteIcon} onClick={()=>deleteHandler(e.id)} /></TableCell>
@@ -118,7 +119,8 @@ const mapDispatchToProps = dispatch =>{
         wishListActiveHandler : () => dispatch(wishListActive()),
         addToWishList : (value) => dispatch(addToWishList(value)),
         addToCart : (productId, userId) => dispatch(addToCart(productId,userId)),
-        productPopUpActive : () => dispatch(productPopUpActive())
+        productPopUpActive : () => dispatch(productPopUpActive()),
+        currentProductHandler : (value)=> dispatch(currentProduct(value))
     }
 }
 

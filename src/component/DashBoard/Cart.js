@@ -1,9 +1,10 @@
 import { Dialog, DialogActions, DialogTitle, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import React from 'react'
 import { connect } from 'react-redux';
-import { addToCart, cartActive, removeFromCart } from '../../Store/Action';
+import { addToCart, cartActive, currentProduct, productPopUpActive, removeFromCart } from '../../Store/Action';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles(()=>({
     dialogPaper:{
@@ -23,7 +24,13 @@ const useStyles = makeStyles(()=>({
         '&:hover':{
             transform: 'translateY(0px)'
         }
-    }
+    },
+    deleteIcon:{
+        transition : 'transform 0.3s',
+        '&:hover':{
+            transform: 'translateY(-3px)'
+        }
+    },
 }))
 
 function Cart(props){
@@ -82,8 +89,16 @@ function Cart(props){
         }
         props.removeFromCart(alteredCartList)
     }
-    
 
+    const deleteFromCartHandler = (productId) =>{
+        let alteredCartList = props.cart.filter((e) => (e.productId!==productId && e.userId===props.activeUserDetail[0].id)||(e.userId!==props.activeUserDetail[0].id))
+        props.removeFromCart(alteredCartList)
+    }
+    
+    const productPopUpActiveHandler = (productId) =>{
+        props.productPopUpActive()
+        props.currentProductHandler(productId)
+    }
 
     return(
         <Dialog
@@ -106,13 +121,14 @@ function Cart(props){
                             <TableCell align='center'><strong>Product Name</strong></TableCell>
                             <TableCell align='center'><strong>Price</strong> </TableCell>
                             <TableCell align='center'><strong>Quantity</strong></TableCell>
+                            <TableCell align='center'><strong>Delete from Cart</strong></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {productDetail.map((e)=>(
                             <TableRow key= {e.id}>
                                 <TableCell align='center'>{e.id}</TableCell>
-                                <TableCell align='center'>{e.title}</TableCell>
+                                <TableCell align='center' className={classes.deleteIcon} onClick={()=>productPopUpActiveHandler(e.id)}>{e.title}</TableCell>
                                 <TableCell align='center'>${e.price}</TableCell>
                                 {/* <TableCell>
                                     {count.filter}
@@ -127,6 +143,9 @@ function Cart(props){
                                             </TableCell>
                                     }
                                 })}
+                                <TableCell align='center'>
+                                    <DeleteIcon onClick={() =>deleteFromCartHandler(e.id)} className={classes.deleteIcon} />
+                                </TableCell>
                             </TableRow>
                         ))
 
@@ -154,7 +173,9 @@ const mapDispatchToProps = dispatch =>{
     return{
         cartActiveHandler : ()=>dispatch(cartActive()),
         addToCart : (productId, userId) => dispatch(addToCart(productId, userId)),
-        removeFromCart : (value) => dispatch(removeFromCart(value))
+        removeFromCart : (value) => dispatch(removeFromCart(value)),
+        productPopUpActive : () => dispatch(productPopUpActive()),
+        currentProductHandler : (value)=> dispatch(currentProduct(value))
     }
 }
 
