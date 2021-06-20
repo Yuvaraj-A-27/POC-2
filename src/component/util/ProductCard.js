@@ -6,17 +6,19 @@ import {currentProduct, loginActive, productPopUpActive} from '../../Store/Actio
 const useStyles = makeStyles(()=>({
     card:{
         marginTop:'50px',
-        maxWidth:'80%',
-        maxHeight:'100%',
+        maxWidth:'350px',
+        maxHeight:'500px',
         background: "linear-gradient(45deg, #a1bff0 1%, #cccccc 30%)",
         transition : 'transform 0.3s',
         '&:hover':{
             transform: 'translateY(10px)'
-        }
+        },
+        boxShadow:'-5px -5px 15px -3px',
+        borderRadius : '5%'
     },
     cardMedia:{
         height: '200px',
-        width : '100%',
+        width : '350px',
     },
 }))
 
